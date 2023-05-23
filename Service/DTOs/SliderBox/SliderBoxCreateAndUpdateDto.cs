@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Service.DTOs.SliderBox
 {
-    public class SliderListDto
+    public class SliderBoxCreateAndUpdateDto
     {
+        public string? Title { get; set; }
+        public byte[] Image { get; set; }
     }
 }

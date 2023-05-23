@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.DTOs.SliderBox
+namespace Service.DTOs.Subscribe
 {
-    public class SliderCreateAndUpdateDto
+    public class SubscribeListDto
     {
+        public string? Email { get; set; }
     }
 }
