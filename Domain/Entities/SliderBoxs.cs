@@ -10,6 +10,6 @@ namespace Domain.Entities
     public class SliderBoxs:BaseEntity
     {
         public string? Title { get; set; }
-        public byte[] Image { get; set; }
+        public byte[]? Image { get; set; }
     }
 }

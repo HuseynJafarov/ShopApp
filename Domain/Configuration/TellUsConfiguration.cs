@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Configuration
 {
-    public class TellUsConfiguration : BaseEntityConfiguration, IEntityTypeConfiguration<TellUs>
+    public class TellUsConfiguration : IEntityTypeConfiguration<TellUs>
     {
         public void Configure(EntityTypeBuilder<TellUs> builder)
         {

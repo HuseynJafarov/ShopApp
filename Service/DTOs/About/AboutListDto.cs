@@ -10,7 +10,7 @@ namespace Service.DTOs.About
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public byte[] Image { get; set; }
+        public byte[]? Image { get; set; }
         public DateTime CreatedDate { get; set; }
 
 

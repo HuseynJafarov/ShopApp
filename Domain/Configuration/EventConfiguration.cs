@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Configuration
 {
-    public class EventConfiguration : BaseEntityConfiguration, IEntityTypeConfiguration<Events>
+    public class EventConfiguration: IEntityTypeConfiguration<Events>
     {
         public void Configure(EntityTypeBuilder<Events> builder)
         {
@@ -17,6 +17,10 @@ namespace Domain.Configuration
             builder.Property(x => x.Description).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Location).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Image).IsRequired();
-        }
+        builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
+        builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
+
+        builder.HasQueryFilter(m => !m.SoftDeleted);
+    }
     }
 }

@@ -9,7 +9,7 @@ namespace Domain.Entities
 {
     public class Settings:BaseEntity
     {
-        public byte[] Logo { get; set; }
+        public byte[]? Logo { get; set; }
         public string? SiteName { get; set; }
         public string?  Description { get; set; }
     }

@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Configuration
 {
-    internal class SliderConfiguration : BaseEntityConfiguration, IEntityTypeConfiguration<Slider>
+    public class SliderConfiguration : IEntityTypeConfiguration<Slider>
     {
         public void Configure(EntityTypeBuilder<Slider> builder)
         {
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Image).IsRequired();
+            builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
+            builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
+
+            builder.HasQueryFilter(m => !m.SoftDeleted);
         }
     }
 }

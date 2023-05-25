@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Configuration
 {
-    public class CartConfiguration : BaseEntityConfiguration, IEntityTypeConfiguration<Carts>
+    public class CartConfiguration :  IEntityTypeConfiguration<Carts>
     {
         public void Configure(EntityTypeBuilder<Carts> builder)
         {

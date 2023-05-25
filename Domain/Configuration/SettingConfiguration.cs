@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Configuration
 {
-    public class SettingConfiguration : BaseEntityConfiguration, IEntityTypeConfiguration<Settings>
+    public class SettingConfiguration : IEntityTypeConfiguration<Settings>
     {
         public void Configure(EntityTypeBuilder<Settings> builder)
         {
             builder.Property(x => x.SiteName).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Logo).IsRequired();
+            builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
+            builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
+
+            builder.HasQueryFilter(m => !m.SoftDeleted);
         }
     }
 }

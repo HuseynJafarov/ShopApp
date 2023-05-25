@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace shop.App.Controllers
 {
+   
     public class AboutController:AppController
     {
         private readonly IAboutService _aboutService;
@@ -38,7 +39,7 @@ namespace shop.App.Controllers
                 return Ok();
             }
             catch (NullReferenceException)
-            {
+            { 
                 return NotFound();
             }
 

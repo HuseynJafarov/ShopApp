@@ -31,7 +31,7 @@ namespace shop.App
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             builder.Services.AddScoped<IAboutRepository, AboutRepository>();
-            builder.Services.AddScoped<IAboutService, IAboutService>();
+            builder.Services.AddScoped<IAboutService, AboutService>();
 
             builder.Services.AddScoped<ICartsRepository, CartsRepository>();
             builder.Services.AddScoped<ICartService, CartService>();

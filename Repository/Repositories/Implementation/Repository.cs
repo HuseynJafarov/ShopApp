@@ -29,6 +29,7 @@ namespace Repository.Repositories.Implementation
 
         public async Task Delete(T entity)
         {
+            if (entity == null) throw new ArgumentNullException();
             _entities.Remove(entity);
             await _context.SaveChangesAsync();
         }
@@ -41,7 +42,7 @@ namespace Repository.Repositories.Implementation
 
         public async Task<T> Get(int id)
         {
-            T entity = await _entities.FindAsync(id) ?? throw new ArgumentNullException();
+            T entity = await _entities.FindAsync(id) ?? throw new NotImplementedException();
             return entity;
         }
 

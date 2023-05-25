@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 
 namespace Domain.Configuration
 {
-    public class SliderBoxConfiguration : BaseEntityConfiguration, IEntityTypeConfiguration<SliderBoxs>
+    public class SliderBoxConfiguration : IEntityTypeConfiguration<SliderBoxs>
     {
         public void Configure(EntityTypeBuilder<SliderBoxs> builder)
         {
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Image).IsRequired();
+            builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
+            builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
+
+            builder.HasQueryFilter(m => !m.SoftDeleted);
         }
     }
 }

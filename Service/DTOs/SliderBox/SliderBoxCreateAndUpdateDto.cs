@@ -9,6 +9,6 @@ namespace Service.DTOs.SliderBox
     public class SliderBoxCreateAndUpdateDto
     {
         public string? Title { get; set; }
-        public byte[] Image { get; set; }
+        public byte[]? Image { get; set; }
     }
 }

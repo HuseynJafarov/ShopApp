@@ -9,7 +9,7 @@ namespace Service.DTOs.SliderBox
     public class SliderBoxListDto
     {
         public string? Title { get; set; }
-        public byte[] Image { get; set; }
+        public byte[]? Image { get; set; }
         public DateTime CreatedDate
         {
             get; set;
