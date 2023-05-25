@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace shop.App.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("api/[controller]/[action]")]
     public class AppController : ControllerBase
     {
 

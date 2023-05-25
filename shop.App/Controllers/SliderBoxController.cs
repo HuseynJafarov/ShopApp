@@ -1,25 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.DTOs.Setting;
+using Service.DTOs.SliderBox;
 using Service.Service.Interface;
 using System.ComponentModel.DataAnnotations;
 
 namespace shop.App.Controllers
 {
-    public class SettingController: AppController
+    public class SliderBoxController :AppController
     {
-        private readonly ISettingService _settingService;
+        private readonly ISliderBoxService _sliderBoxService;
 
-        public SettingController(ISettingService settingService)
+        public SliderBoxController(ISliderBoxService sliderBoxService)
         {
-            _settingService = settingService;
+            _sliderBoxService = sliderBoxService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]SettingCreateAndUpdateDto data)
+        public async Task<IActionResult> Create([FromBody] SliderBoxCreateAndUpdateDto data)
         {
             try
             {
-                await _settingService.CreateAsync(data);
+                await _sliderBoxService.CreateAsync(data);
                 return Ok();
             }
             catch (NullReferenceException)
@@ -32,16 +33,16 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            await _settingService.GetAllAsync();
+            await _sliderBoxService.GetAllAsync();
             return Ok();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SoftDelete([Required]int id)
+        public async Task<IActionResult> SoftDelete([Required] int id)
         {
             try
             {
-                await _settingService.SoftDeleteAsync(id);
+                await _sliderBoxService.SoftDeleteAsync(id);
                 return Ok();
             }
             catch (NullReferenceException)
@@ -56,7 +57,7 @@ namespace shop.App.Controllers
         {
             try
             {
-                await _settingService.DeleteAsync(id);
+                await _sliderBoxService.DeleteAsync(id);
                 return Ok();
             }
             catch (NullReferenceException)
@@ -67,11 +68,11 @@ namespace shop.App.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromBody][Required] int id, SettingCreateAndUpdateDto data)
+        public async Task<IActionResult> Update([FromBody][Required] int id, SliderBoxCreateAndUpdateDto data)
         {
             try
             {
-                await _settingService.UpdateAsync(id, data);
+                await _sliderBoxService.UpdateAsync(id, data);
                 return Ok();
             }
             catch (NullReferenceException)
@@ -83,7 +84,7 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string? searchData)
         {
-            await _settingService.SerachAsync(searchData);
+            await _sliderBoxService.SerachAsync(searchData);
             return Ok();
         }
     }

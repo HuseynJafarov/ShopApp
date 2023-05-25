@@ -1,5 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Repository.Data;
+using Repository.Repositories.Implementation;
+using Repository.Repositories.Interface;
+using Service.Mappings;
+using Service.Service.Implementation;
+using Service.Service.Interface;
 
 namespace shop.App
 {
@@ -20,6 +25,44 @@ namespace shop.App
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            builder.Services.AddScoped<IAboutRepository, AboutRepository>();
+            builder.Services.AddScoped<IAboutService, IAboutService>();
+
+            builder.Services.AddScoped<ICartsRepository, CartsRepository>();
+            builder.Services.AddScoped<ICartService, CartService>();
+
+            builder.Services.AddScoped<IContactRepository, ContactRepository>();
+            builder.Services.AddScoped<IContactService, ContactService>();
+
+            builder.Services.AddScoped<IEventsRepository, EventsRepository>();
+            builder.Services.AddScoped<IEventService, EventService>();
+
+            builder.Services.AddScoped<IHeroSlidersRepository, HeroSlidersRepository>();
+            builder.Services.AddScoped<IHeroSliderService, HeroSliderService>();
+
+            builder.Services.AddScoped<IServicesRepository, ServicesRepository>();
+            builder.Services.AddScoped<IServicesService, ServicesService>();
+
+            builder.Services.AddScoped<ISettingsRepository, SettingsRepository>();
+            builder.Services.AddScoped<ISettingService, SettingService>();
+
+            builder.Services.AddScoped<ISliderBoxsRepository, SliderBoxsRepository>();
+            builder.Services.AddScoped<ISliderBoxService, SliderBoxService>();
+
+            builder.Services.AddScoped<ISliderRepository, SliderRepository>();
+            builder.Services.AddScoped<ISliderService, SliderService>();
+
+            builder.Services.AddScoped<ISubscribeRepository, SubscribeRepository>();
+            builder.Services.AddScoped<ISubscribeService, SubscribeService>();
+
+            builder.Services.AddScoped<ITellUsRepository, TellUsRepository>();
+            builder.Services.AddScoped<ITellusService, TellusService>();
+
 
             var app = builder.Build();
             

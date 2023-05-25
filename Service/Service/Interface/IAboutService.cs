@@ -11,7 +11,6 @@ namespace Service.Service.Interface
     {
         Task CreateAsync(AboutCreateAndUpdateDto about);
         Task<List<AboutListDto>> GetAllAsync();
-       
         Task DeleteAsync(int id);
         Task SoftDeleteAsync(int id);
         Task UpdateAsync(int id, AboutCreateAndUpdateDto about);
