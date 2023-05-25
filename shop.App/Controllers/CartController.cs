@@ -1,33 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Service.DTOs.About;
+using Service.DTOs.Cart;
 using Service.Service.Interface;
 using System.ComponentModel.DataAnnotations;
 
 namespace shop.App.Controllers
 {
-    public class AboutController:AppController
+    public class CartController: AppController
     {
-        private readonly IAboutService _aboutService;
-        private readonly IWebHostEnvironment _env;
+        private readonly ICartService _cartService;
 
-        public AboutController(IAboutService aboutService, IWebHostEnvironment env)
+        public CartController(ICartService cartService)
         {
-            _aboutService = aboutService;
-            _env = env;
+            _cartService = cartService;
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AboutCreateAndUpdateDto about)
+        public async Task<IActionResult> Create([FromBody] CartCreateAndUpdateDto cart)
         {
-            await _aboutService.CreateAsync(about);
+            await _cartService.CreateAsync(cart);
+
             return Ok();
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
-            return Ok(await _aboutService.GetAllAsync());
+            await _cartService.GetAllAsync();
+            return Ok();
         }
 
         [HttpDelete]
@@ -35,14 +34,14 @@ namespace shop.App.Controllers
         {
             try
             {
-                await _aboutService.DeleteAsync(id);
+                await _cartService.DeleteAsync(id);
                 return Ok();
             }
             catch (NullReferenceException)
             {
+
                 return NotFound();
             }
-
         }
 
         [HttpPost]
@@ -50,35 +49,38 @@ namespace shop.App.Controllers
         {
             try
             {
-                await _aboutService.SoftDeleteAsync(id);
+                await _cartService.SoftDeleteAsync(id);
                 return Ok();
             }
             catch (NullReferenceException)
             {
+
                 return NotFound();
             }
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute][Required] int id, AboutCreateAndUpdateDto about)
+        public async Task<IActionResult> Update([FromBody][Required]int id,CartCreateAndUpdateDto cart)
         {
             try
             {
-                await _aboutService.UpdateAsync(id, about);
+                await _cartService.UpdateAsync(id, cart);
                 return Ok();
+
             }
             catch (NullReferenceException)
             {
+
                 return NotFound();
             }
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string? search)
+        public async Task<IActionResult> Search(string? searchText)
         {
-            return Ok(await _aboutService.SerachAsync(search));
+                await _cartService.SerachAsync(searchText);
+                return Ok();
         }
-
     }
 }
