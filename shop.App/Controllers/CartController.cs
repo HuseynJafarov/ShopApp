@@ -23,7 +23,7 @@ namespace shop.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAll()
         {
             await _cartService.GetAllAsync();
             return Ok();

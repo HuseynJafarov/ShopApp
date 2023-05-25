@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.DTOs.Cart;
 using Service.DTOs.Contact;
+using Service.Service.Implementation;
 using Service.Service.Interface;
+using System.ComponentModel.DataAnnotations;
 
 namespace shop.App.Controllers
 {
@@ -18,6 +21,67 @@ namespace shop.App.Controllers
         public async Task<IActionResult> Create(ContactCreateAndUpdateDto contact)
         {
             await _contactService.CreateAsync(contact);
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            await _contactService.GetAllAsync();
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([Required] int id)
+        {
+            try
+            {
+                await _contactService.DeleteAsync(id);
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SoftDelete([Required] int id)
+        {
+            try
+            {
+                await _contactService.SoftDeleteAsync(id);
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+
+                return NotFound();
+            }
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromBody][Required] int id, ContactCreateAndUpdateDto contact)
+        {
+            try
+            {
+                await _contactService.UpdateAsync(id, contact);
+                return Ok();
+
+            }
+            catch (NullReferenceException)
+            {
+
+                return NotFound();
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string? searchText)
+        {
+            await _contactService.SerachAsync(searchText);
             return Ok();
         }
     }
