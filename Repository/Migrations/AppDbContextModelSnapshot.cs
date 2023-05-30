@@ -33,7 +33,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 169, DateTimeKind.Utc).AddTicks(6182));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 216, DateTimeKind.Utc).AddTicks(182));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -57,6 +57,76 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("About");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Author", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("Date")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 219, DateTimeKind.Utc).AddTicks(7209));
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("SoftDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Author");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CartAuthor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartsId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 219, DateTimeKind.Utc).AddTicks(8313));
+
+                    b.Property<bool>("SoftDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CartsId");
+
+                    b.ToTable("CartAuthor");
                 });
 
             modelBuilder.Entity("Domain.Entities.Carts", b =>
@@ -107,7 +177,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 173, DateTimeKind.Utc).AddTicks(3240));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 220, DateTimeKind.Utc).AddTicks(5941));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -155,7 +225,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 175, DateTimeKind.Utc).AddTicks(417));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 221, DateTimeKind.Utc).AddTicks(2630));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -197,7 +267,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 176, DateTimeKind.Utc).AddTicks(7694));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 221, DateTimeKind.Utc).AddTicks(9265));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -239,7 +309,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 178, DateTimeKind.Utc).AddTicks(2978));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 222, DateTimeKind.Utc).AddTicks(5189));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -276,7 +346,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 180, DateTimeKind.Utc).AddTicks(7205));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 223, DateTimeKind.Utc).AddTicks(1439));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -313,7 +383,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 183, DateTimeKind.Utc).AddTicks(6061));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 224, DateTimeKind.Utc).AddTicks(3150));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -350,7 +420,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 182, DateTimeKind.Utc).AddTicks(858));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 223, DateTimeKind.Utc).AddTicks(7033));
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -382,7 +452,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 25, 12, 28, 21, 184, DateTimeKind.Utc).AddTicks(6185));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 15, 56, 11, 224, DateTimeKind.Utc).AddTicks(7880));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -436,6 +506,35 @@ namespace Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TellUs");
+                });
+
+            modelBuilder.Entity("Domain.Entities.CartAuthor", b =>
+                {
+                    b.HasOne("Domain.Entities.Author", "Author")
+                        .WithMany("CartAuthors")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Carts", "Carts")
+                        .WithMany("CartAuthors")
+                        .HasForeignKey("CartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Carts");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Author", b =>
+                {
+                    b.Navigation("CartAuthors");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Carts", b =>
+                {
+                    b.Navigation("CartAuthors");
                 });
 #pragma warning restore 612, 618
         }
