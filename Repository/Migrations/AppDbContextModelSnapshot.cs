@@ -33,7 +33,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 221, DateTimeKind.Utc).AddTicks(4135));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 325, DateTimeKind.Utc).AddTicks(6916));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -70,7 +70,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 227, DateTimeKind.Utc).AddTicks(9668));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 331, DateTimeKind.Utc).AddTicks(3766));
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -113,7 +113,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 228, DateTimeKind.Utc).AddTicks(862));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 331, DateTimeKind.Utc).AddTicks(5193));
 
                     b.Property<bool>("SoftDeleted")
                         .ValueGeneratedOnAdd()
@@ -177,7 +177,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 228, DateTimeKind.Utc).AddTicks(9004));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 332, DateTimeKind.Utc).AddTicks(4681));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -225,7 +225,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 229, DateTimeKind.Utc).AddTicks(6892));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 333, DateTimeKind.Utc).AddTicks(2804));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -270,7 +270,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 230, DateTimeKind.Utc).AddTicks(3895));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 334, DateTimeKind.Utc).AddTicks(23));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -312,7 +312,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 231, DateTimeKind.Utc).AddTicks(414));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 334, DateTimeKind.Utc).AddTicks(5807));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -349,7 +349,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 231, DateTimeKind.Utc).AddTicks(6825));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(1623));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -386,7 +386,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 232, DateTimeKind.Utc).AddTicks(9308));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 336, DateTimeKind.Utc).AddTicks(3590));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -423,7 +423,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 232, DateTimeKind.Utc).AddTicks(2681));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(7916));
 
                     b.Property<byte[]>("Image")
                         .IsRequired()
@@ -459,22 +459,33 @@ namespace Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(2703));
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<byte[]>("Image")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Info")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("IsGraduated")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("SoftDeleted")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 
@@ -494,7 +505,7 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 27, 28, 233, DateTimeKind.Utc).AddTicks(4600));
+                        .HasDefaultValue(new DateTime(2023, 5, 30, 17, 31, 53, 336, DateTimeKind.Utc).AddTicks(7857));
 
                     b.Property<string>("Email")
                         .IsRequired()

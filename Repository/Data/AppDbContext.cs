@@ -26,6 +26,7 @@ namespace Repository.Data
             modelBuilder.ApplyConfiguration(new HeroSliderConfiguration());
             modelBuilder.ApplyConfiguration(new ServicesConfiguration());
             modelBuilder.ApplyConfiguration(new SettingConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentConfiguration());
             modelBuilder.ApplyConfiguration(new SliderBoxConfiguration());
             modelBuilder.ApplyConfiguration(new SliderConfiguration());
             modelBuilder.ApplyConfiguration(new SubscribeConfiguration());

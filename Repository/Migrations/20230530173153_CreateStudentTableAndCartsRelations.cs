@@ -14,7 +14,7 @@ namespace Repository.Migrations
                 table: "Subscribe",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 233, DateTimeKind.Utc).AddTicks(4600),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 336, DateTimeKind.Utc).AddTicks(7857),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 224, DateTimeKind.Utc).AddTicks(7880));
@@ -24,7 +24,7 @@ namespace Repository.Migrations
                 table: "SliderBoxs",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 232, DateTimeKind.Utc).AddTicks(2681),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(7916),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 223, DateTimeKind.Utc).AddTicks(7033));
@@ -34,7 +34,7 @@ namespace Repository.Migrations
                 table: "Slider",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 232, DateTimeKind.Utc).AddTicks(9308),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 336, DateTimeKind.Utc).AddTicks(3590),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 224, DateTimeKind.Utc).AddTicks(3150));
@@ -44,7 +44,7 @@ namespace Repository.Migrations
                 table: "Settings",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 231, DateTimeKind.Utc).AddTicks(6825),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(1623),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 223, DateTimeKind.Utc).AddTicks(1439));
@@ -54,7 +54,7 @@ namespace Repository.Migrations
                 table: "Services",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 231, DateTimeKind.Utc).AddTicks(414),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 334, DateTimeKind.Utc).AddTicks(5807),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 222, DateTimeKind.Utc).AddTicks(5189));
@@ -64,7 +64,7 @@ namespace Repository.Migrations
                 table: "HeroSliders",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 230, DateTimeKind.Utc).AddTicks(3895),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 334, DateTimeKind.Utc).AddTicks(23),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 221, DateTimeKind.Utc).AddTicks(9265));
@@ -74,7 +74,7 @@ namespace Repository.Migrations
                 table: "Events",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 229, DateTimeKind.Utc).AddTicks(6892),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 333, DateTimeKind.Utc).AddTicks(2804),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 221, DateTimeKind.Utc).AddTicks(2630));
@@ -91,7 +91,7 @@ namespace Repository.Migrations
                 table: "Contact",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 228, DateTimeKind.Utc).AddTicks(9004),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 332, DateTimeKind.Utc).AddTicks(4681),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 220, DateTimeKind.Utc).AddTicks(5941));
@@ -101,7 +101,7 @@ namespace Repository.Migrations
                 table: "CartAuthor",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 228, DateTimeKind.Utc).AddTicks(862),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 331, DateTimeKind.Utc).AddTicks(5193),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 219, DateTimeKind.Utc).AddTicks(8313));
@@ -111,7 +111,7 @@ namespace Repository.Migrations
                 table: "Author",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 227, DateTimeKind.Utc).AddTicks(9668),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 331, DateTimeKind.Utc).AddTicks(3766),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 219, DateTimeKind.Utc).AddTicks(7209));
@@ -121,7 +121,7 @@ namespace Repository.Migrations
                 table: "About",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 221, DateTimeKind.Utc).AddTicks(4135),
+                defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 325, DateTimeKind.Utc).AddTicks(6916),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
                 oldDefaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 216, DateTimeKind.Utc).AddTicks(182));
@@ -132,14 +132,14 @@ namespace Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Info = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsGraduated = table.Column<bool>(type: "bit", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Info = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IsGraduated = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     CartId = table.Column<int>(type: "int", nullable: false),
                     CartsId = table.Column<int>(type: "int", nullable: true),
-                    SoftDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    SoftDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(2703))
                 },
                 constraints: table =>
                 {
@@ -174,7 +174,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 224, DateTimeKind.Utc).AddTicks(7880),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 233, DateTimeKind.Utc).AddTicks(4600));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 336, DateTimeKind.Utc).AddTicks(7857));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -184,7 +184,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 223, DateTimeKind.Utc).AddTicks(7033),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 232, DateTimeKind.Utc).AddTicks(2681));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(7916));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -194,7 +194,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 224, DateTimeKind.Utc).AddTicks(3150),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 232, DateTimeKind.Utc).AddTicks(9308));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 336, DateTimeKind.Utc).AddTicks(3590));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -204,7 +204,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 223, DateTimeKind.Utc).AddTicks(1439),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 231, DateTimeKind.Utc).AddTicks(6825));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 335, DateTimeKind.Utc).AddTicks(1623));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -214,7 +214,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 222, DateTimeKind.Utc).AddTicks(5189),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 231, DateTimeKind.Utc).AddTicks(414));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 334, DateTimeKind.Utc).AddTicks(5807));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -224,7 +224,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 221, DateTimeKind.Utc).AddTicks(9265),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 230, DateTimeKind.Utc).AddTicks(3895));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 334, DateTimeKind.Utc).AddTicks(23));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -234,7 +234,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 221, DateTimeKind.Utc).AddTicks(2630),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 229, DateTimeKind.Utc).AddTicks(6892));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 333, DateTimeKind.Utc).AddTicks(2804));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -244,7 +244,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 220, DateTimeKind.Utc).AddTicks(5941),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 228, DateTimeKind.Utc).AddTicks(9004));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 332, DateTimeKind.Utc).AddTicks(4681));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -254,7 +254,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 219, DateTimeKind.Utc).AddTicks(8313),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 228, DateTimeKind.Utc).AddTicks(862));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 331, DateTimeKind.Utc).AddTicks(5193));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -264,7 +264,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 219, DateTimeKind.Utc).AddTicks(7209),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 227, DateTimeKind.Utc).AddTicks(9668));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 331, DateTimeKind.Utc).AddTicks(3766));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
@@ -274,7 +274,7 @@ namespace Repository.Migrations
                 defaultValue: new DateTime(2023, 5, 30, 15, 56, 11, 216, DateTimeKind.Utc).AddTicks(182),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 5, 30, 17, 27, 28, 221, DateTimeKind.Utc).AddTicks(4135));
+                oldDefaultValue: new DateTime(2023, 5, 30, 17, 31, 53, 325, DateTimeKind.Utc).AddTicks(6916));
         }
     }
 }
