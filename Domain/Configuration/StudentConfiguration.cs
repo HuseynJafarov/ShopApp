@@ -9,19 +9,20 @@ using System.Threading.Tasks;
 
 namespace Domain.Configuration
 {
-    public class EventConfiguration: IEntityTypeConfiguration<Events>
+    public class StudentConfiguration : IEntityTypeConfiguration<Student>
     {
-        public void Configure(EntityTypeBuilder<Events> builder)
+        public void Configure(EntityTypeBuilder<Student> builder)
         {
-            builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Location).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.FullName).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Info).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.IsGraduated).IsRequired().HasDefaultValue(false);
             builder.Property(x => x.Image).IsRequired();
-            builder.Property(m => m.EventDate).IsRequired();
+            builder.Property(x => x.CartId).IsRequired();
             builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
             builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
 
             builder.HasQueryFilter(m => !m.SoftDeleted);
-    }
+            builder.HasQueryFilter(m => !m.IsGraduated);
+        }
     }
 }

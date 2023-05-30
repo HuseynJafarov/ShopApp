@@ -14,5 +14,6 @@ namespace Domain.Entities
         public byte[]? Image { get; set; }
         public double Price { get; set; }
         public ICollection<CartAuthor>? CartAuthors { get; set; }
+        public ICollection<Student>? Students { get; set; }
     }
 }
