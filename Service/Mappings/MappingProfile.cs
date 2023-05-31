@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Service.DTOs.About;
 using Service.DTOs.Cart;
+using Service.DTOs.CartAuthor;
 using Service.DTOs.Contact;
 using Service.DTOs.Event;
 using Service.DTOs.HeroSlider;
@@ -9,6 +10,7 @@ using Service.DTOs.Services;
 using Service.DTOs.Setting;
 using Service.DTOs.Slider;
 using Service.DTOs.SliderBox;
+using Service.DTOs.Student;
 using Service.DTOs.Subscribe;
 using Service.DTOs.TellUs;
 using System;
@@ -61,6 +63,15 @@ namespace Service.Mappings
 
             CreateMap<Subscribe, SubscribeListDto>();
             CreateMap<TellUs, TellusListDto>();
+
+            CreateMap<StudentCreateAndUpdateDto, Student>();
+            CreateMap<Student, StudentListDto>();
+            CreateMap<StudentCreateAndUpdateDto, Student>().ReverseMap();
+
+            CreateMap<CartCreateAndUpdateDto, CartAuthor>();
+            CreateMap<CartAuthor, CartAuthorListDto>();
+            CreateMap<CartCreateAndUpdateDto, CartAuthor>().ReverseMap();
+
 
 
 
