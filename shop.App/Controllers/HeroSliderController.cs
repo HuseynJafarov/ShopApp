@@ -26,8 +26,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            await _heroSliderService.GetAllAsync();
-            return Ok();
+            
+            return Ok(await _heroSliderService.GetAllAsync());
         }
 
         [HttpDelete]
@@ -80,8 +80,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string? searchText)
         {
-            await _heroSliderService.SerachAsync(searchText);
-            return Ok();
+            
+            return Ok(await _heroSliderService.SerachAsync(searchText));
         }
     }
 }

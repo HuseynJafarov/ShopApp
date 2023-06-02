@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Service.Service.Interface
 {
-    internal class IStudentService
+    public interface IStudentService
     {
+
     }
 }

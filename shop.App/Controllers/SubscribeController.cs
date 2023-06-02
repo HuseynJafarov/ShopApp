@@ -17,8 +17,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            await _subscribeService.GetAllAsync();
-            return Ok();
+            
+            return Ok(await _subscribeService.GetAllAsync());
         }
 
         [HttpPost]
@@ -54,8 +54,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string? searchData)
         {
-            await _subscribeService.SerachAsync(searchData);
-            return Ok();
+            
+            return Ok(await _subscribeService.SerachAsync(searchData));
         }
     }
 }

@@ -66,8 +66,7 @@ namespace shop.App
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<IStudentService, StudentService>();
 
-            builder.Services.AddScoped<ICartAuthorRepository, CartAuthorRepository>();
-            builder.Services.AddScoped<ICartAuthorService, CartAuthorService>();
+          
 
 
             builder.Services.AddCors(options =>

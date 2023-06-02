@@ -16,8 +16,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            await _tellusService.GetAllAsync();
-            return Ok();
+            
+            return Ok(await _tellusService.GetAllAsync());
         }
 
         [HttpPost]
@@ -53,8 +53,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string? searchData)
         {
-            await _tellusService.SerachAsync(searchData);
-            return Ok();
+            
+            return Ok(await _tellusService.SerachAsync(searchData));
         }
     }
 }

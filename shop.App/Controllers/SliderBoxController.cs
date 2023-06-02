@@ -33,8 +33,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            await _sliderBoxService.GetAllAsync();
-            return Ok();
+            
+            return Ok(await _sliderBoxService.GetAllAsync());
         }
 
         [HttpPost]
@@ -84,8 +84,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string? searchData)
         {
-            await _sliderBoxService.SerachAsync(searchData);
-            return Ok();
+            
+            return Ok(await _sliderBoxService.SerachAsync(searchData));
         }
     }
 }

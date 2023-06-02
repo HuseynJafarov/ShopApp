@@ -27,8 +27,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            await _cartService.GetAllAsync();
-            return Ok();
+            
+            return Ok(await _cartService.GetAllAsync());
         }
 
         [HttpDelete]
@@ -81,8 +81,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string? searchText)
         {
-                await _cartService.SerachAsync(searchText);
-                return Ok();
+               
+                return Ok(await _cartService.SerachAsync(searchText));
         }
     }
 }

@@ -1,11 +1,5 @@
-﻿using Service.DTOs.About;
-using Service.DTOs.Cart;
-using Service.DTOs.Contact;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Service.DTOs.Contact;
+
 
 namespace Service.Service.Interface
 {
