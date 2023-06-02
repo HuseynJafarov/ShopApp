@@ -56,6 +56,10 @@ namespace shop.App.Controllers
             catch (NullReferenceException)
             {
                 return NotFound();
+
+
+
+
             }
         }
 
@@ -67,10 +71,14 @@ namespace shop.App.Controllers
             {
                 await _aboutService.UpdateAsync(id, about);
                 return Ok();
+
+
+
             }
             catch (NullReferenceException)
             {
                 return NotFound();
+
             }
         }
 
@@ -78,6 +86,7 @@ namespace shop.App.Controllers
         public async Task<IActionResult> Search(string? search)
         {
             return Ok(await _aboutService.SerachAsync(search));
+
         }
 
     }

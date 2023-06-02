@@ -8,6 +8,7 @@ namespace Service.DTOs.Subscribe
 {
     public class SubscribeListDto
     {
+        public int Id { get; set; }
         public string? Email { get; set; }
     }
 }

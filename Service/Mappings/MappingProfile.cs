@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Service.DTOs.About;
+using Service.DTOs.Author;
 using Service.DTOs.Cart;
 using Service.DTOs.CartAuthor;
 using Service.DTOs.Contact;
@@ -28,6 +29,10 @@ namespace Service.Mappings
             CreateMap<AboutCreateAndUpdateDto, About>();
             CreateMap<About, AboutListDto>();
             CreateMap<AboutCreateAndUpdateDto, About>().ReverseMap();
+
+            CreateMap<AuthorCreateAndUpdateDto, Author>();
+            CreateMap<Author, AuthorListDto>();
+            CreateMap<AuthorCreateAndUpdateDto, Author>().ReverseMap();
 
             CreateMap<CartCreateAndUpdateDto, Carts>();
             CreateMap<Carts,CartListDto>();
@@ -67,14 +72,6 @@ namespace Service.Mappings
             CreateMap<StudentCreateAndUpdateDto, Student>();
             CreateMap<Student, StudentListDto>();
             CreateMap<StudentCreateAndUpdateDto, Student>().ReverseMap();
-
-            CreateMap<CartCreateAndUpdateDto, CartAuthor>();
-            CreateMap<CartAuthor, CartAuthorListDto>();
-            CreateMap<CartCreateAndUpdateDto, CartAuthor>().ReverseMap();
-
-
-
-
         }
     }
 }

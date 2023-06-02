@@ -62,7 +62,7 @@ namespace shop.App.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromBody][Required] int id, EventCreateAndUpdateDto data)
+        public async Task<IActionResult> Update([FromRoute][Required] int id, EventCreateAndUpdateDto data)
         {
             try
             {
