@@ -23,6 +23,11 @@ namespace Service.Service.Implementation
             _mapper = mapper;
         }
 
+        public async Task CreateAsync(TellUsCreateAndUpdateDto tellUs)
+        {
+            await _repo.Create(_mapper.Map<TellUs>(tellUs));
+        }
+
         public async Task DeleteAsync(int id)
         {
             TellUs tellUs = await _repo.Get(id);
@@ -55,6 +60,13 @@ namespace Service.Service.Implementation
             TellUs tellUs = await _repo.Get(id);
             await _repo.SoftDelete(tellUs
                 );
+        }
+
+        public async Task UpdateAsync(int id, TellUsCreateAndUpdateDto tellUs)
+        {
+            var dbTellUs = await _repo.Get(id);
+            _mapper.Map(tellUs, dbTellUs);
+            await _repo.Update(dbTellUs);
         }
     }
 }

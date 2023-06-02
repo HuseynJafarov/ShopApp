@@ -22,6 +22,11 @@ namespace Service.Service.Implementation
             _mapper = mapper;
         }
 
+        public async Task CreateAsync(SubscribeCreateAndUpdateDto subscribe)
+        {
+            await _repo.Create(_mapper.Map<Subscribe>(subscribe));
+        }
+
         public async Task DeleteAsync(int id)
         {
             Subscribe subscribe = await _repo.Get(id);
@@ -54,6 +59,13 @@ namespace Service.Service.Implementation
         {
             Subscribe subscribe = await _repo.Get(id);
             await _repo.SoftDelete(subscribe);
+        }
+
+        public async Task UpdateAsync(int id, SubscribeCreateAndUpdateDto subscribe)
+        {
+            var dbSubscribe = await _repo.Get(id);
+            _mapper.Map(subscribe, dbSubscribe);
+            await _repo.Update(dbSubscribe);
         }
     }
 }

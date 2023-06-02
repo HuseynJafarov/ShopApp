@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.DTOs.Slider;
+using Service.DTOs.TellUs;
+using Service.Service.Implementation;
 using Service.Service.Interface;
+using Service.Validations.Contact;
 using System.ComponentModel.DataAnnotations;
 
 namespace shop.App.Controllers
@@ -11,6 +15,29 @@ namespace shop.App.Controllers
         public TellUsController(ITellusService tellusService)
         {
             _tellusService = tellusService;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] TellUsCreateAndUpdateDto data)
+        {
+            TellUsCreateAndUpdateDtoValidator validator = new();
+            var validationResult = validator.Validate(data);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            try
+            {
+                await _tellusService.CreateAsync(data);
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+
         }
 
         [HttpGet]
@@ -41,6 +68,30 @@ namespace shop.App.Controllers
             try
             {
                 await _tellusService.DeleteAsync(id);
+                return Ok();
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update([FromRoute][Required] int id, TellUsCreateAndUpdateDto data)
+        {
+            TellUsCreateAndUpdateDtoValidator validator = new();
+            var validationResult = validator.Validate(data);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
+            try
+            {
+                await _tellusService.UpdateAsync(id, data);
                 return Ok();
             }
             catch (NullReferenceException)

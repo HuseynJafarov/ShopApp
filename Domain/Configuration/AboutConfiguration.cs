@@ -19,6 +19,7 @@ namespace Domain.Configuration
             builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
             builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
 
+
             builder.HasQueryFilter(m => !m.SoftDeleted);
         }
     }

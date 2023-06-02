@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Service.Service.Implementation
 {
-    internal class AuthorService
+    public class AuthorService
     {
     }
 }

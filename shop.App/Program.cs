@@ -1,10 +1,16 @@
+using Domain.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Repository.Data;
 using Repository.Repositories.Implementation;
 using Repository.Repositories.Interface;
 using Service.Mappings;
 using Service.Service.Implementation;
 using Service.Service.Interface;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace shop.App
 {
@@ -26,12 +32,40 @@ namespace shop.App
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
+            builder.Services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.RequireHttpsMetadata = false;
+                    cfg.SaveToken = true;
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                        ClockSkew = TimeSpan.Zero // remove delay of token when expire
+                    };
+                });
+
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             builder.Services.AddScoped<IAboutRepository, AboutRepository>();
             builder.Services.AddScoped<IAboutService, AboutService>();
+
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            //builder.Services.AddScoped<IAuthorService, AuthorService>();
 
             builder.Services.AddScoped<ICartsRepository, CartsRepository>();
             builder.Services.AddScoped<ICartService, CartService>();
@@ -66,7 +100,9 @@ namespace shop.App
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<IStudentService, StudentService>();
 
-          
+            //builder.Services.AddScoped<IAccountService, AccountService>();
+
+
 
 
             builder.Services.AddCors(options =>

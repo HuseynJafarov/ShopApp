@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Service.DTOs.About;
+using Service.DTOs.Account;
 using Service.DTOs.Author;
 using Service.DTOs.Cart;
-using Service.DTOs.CartAuthor;
 using Service.DTOs.Contact;
 using Service.DTOs.Event;
 using Service.DTOs.HeroSlider;
@@ -14,11 +14,7 @@ using Service.DTOs.SliderBox;
 using Service.DTOs.Student;
 using Service.DTOs.Subscribe;
 using Service.DTOs.TellUs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Service.Mappings
 {
@@ -66,12 +62,20 @@ namespace Service.Mappings
             CreateMap<SliderBoxs, SliderBoxListDto>();
             CreateMap<SliderBoxCreateAndUpdateDto, SliderBoxs>().ReverseMap();
 
+            CreateMap<SubscribeCreateAndUpdateDto, Subscribe>();
             CreateMap<Subscribe, SubscribeListDto>();
+            CreateMap<SubscribeCreateAndUpdateDto, Subscribe>().ReverseMap();
+
+            CreateMap<TellUsCreateAndUpdateDto, TellUs>();
             CreateMap<TellUs, TellusListDto>();
+            CreateMap<TellUsCreateAndUpdateDto, TellUs>().ReverseMap();
 
             CreateMap<StudentCreateAndUpdateDto, Student>();
             CreateMap<Student, StudentListDto>();
             CreateMap<StudentCreateAndUpdateDto, Student>().ReverseMap();
+
+
+            CreateMap<RegisterDto, AppUser>().ReverseMap();
         }
     }
 }
