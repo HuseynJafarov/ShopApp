@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Service.DTOs.About;
-using Service.DTOs.Account;
 using Service.DTOs.Author;
 using Service.DTOs.Cart;
 using Service.DTOs.Contact;
@@ -14,7 +13,7 @@ using Service.DTOs.SliderBox;
 using Service.DTOs.Student;
 using Service.DTOs.Subscribe;
 using Service.DTOs.TellUs;
-
+using Services.DTOs.Account;
 
 namespace Service.Mappings
 {
@@ -46,9 +45,9 @@ namespace Service.Mappings
             CreateMap<HeroSliders,HeroSliderListDto>();
             CreateMap<HeroSliderCreateAndUpdateDto, HeroSliders>().ReverseMap();
 
-            CreateMap<ServicesCreateAndUpdateDto, Services>();
-            CreateMap<Services, ServicesListDto>();
-            CreateMap<ServicesCreateAndUpdateDto, Services>().ReverseMap();
+            CreateMap<ServicesCreateAndUpdateDto, Domain.Entities.Services>();
+            CreateMap<Domain.Entities.Services, ServicesListDto>();
+            CreateMap<ServicesCreateAndUpdateDto, Domain.Entities.Services>().ReverseMap();
 
             CreateMap<SettingCreateAndUpdateDto, Settings>();
             CreateMap<Settings, ServicesCreateAndUpdateDto>();
@@ -75,7 +74,9 @@ namespace Service.Mappings
             CreateMap<StudentCreateAndUpdateDto, Student>().ReverseMap();
 
 
-            CreateMap<RegisterDto, AppUser>().ReverseMap();
+            CreateMap<RegisterDto, AppUser>();
+            CreateMap<AppUser, UserDto>();
+
         }
     }
 }

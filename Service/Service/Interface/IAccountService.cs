@@ -1,15 +1,19 @@
-﻿using Service.DTOs.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Microsoft.AspNetCore.Identity;
+using Services.DTOs.Account;
+using Services.Helpers.Responses;
+
 
 namespace Service.Service.Interface
 {
     public interface IAccountService
     {
-        Task<string?> LoginAsync(LoginDto model);
-        Task<ApiResponse> RegisterAsync(RegisterDto model);
+        Task<RegisterResponse> RegisterAsync(RegisterDto model);
+        Task<LoginResponse> LoginAsync(LoginDto model);
+        Task CreateRoleAsync();
+        Task<IEnumerable<IdentityRole>> GetRolesAsync();
+        Task<IEnumerable<UserDto>> GetUsersAsync();
+        Task AddRoleToUserAsync(UserRoleDto model);
+        Task<IEnumerable<string>> GetRolesByUserAsync(string userId);
     }
 }

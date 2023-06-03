@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Service.DTOs.Account;
 using Service.Service.Interface;
+using Services.DTOs.Account;
+using Services.Helpers;
+using Services.Helpers.Enums;
+using Services.Helpers.Responses;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -16,33 +21,91 @@ namespace Service.Service.Implementation
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
+        private readonly JWTSettings _jwtSetting;
 
-        public AccountService(IConfiguration configuration, UserManager<AppUser> userManager,
+        public AccountService(IOptions<JWTSettings> jwt, UserManager<AppUser> userManager,
             RoleManager<IdentityRole> roleManager, IMapper mapper)
         {
-            _configuration = configuration;
+            _jwtSetting = jwt.Value;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
         }
+        public async Task AddRoleToUserAsync(UserRoleDto model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            var role = await _roleManager.FindByIdAsync(model.RoleId);
+            await _userManager.AddToRoleAsync(user, role.ToString());
+        }
 
-        public async Task<string?> LoginAsync(LoginDto model)
+        public async Task<IEnumerable<string>> GetRolesByUserAsync(string userId)
+        {
+            return await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(userId));
+        }
+
+        public async Task CreateRoleAsync()
+        {
+            foreach (var role in Enum.GetValues(typeof(Roles)))
+            {
+                if (!await _roleManager.RoleExistsAsync(role.ToString()))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
+                }
+            }
+        }
+
+        public async Task<IEnumerable<IdentityRole>> GetRolesAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+        }
+
+        public async Task<IEnumerable<UserDto>> GetUsersAsync()
+        {
+            return _mapper.Map<List<UserDto>>(await _userManager.Users.ToListAsync());
+        }
+
+        public async Task<LoginResponse> LoginAsync(LoginDto model)
         {
             var dbUser = await _userManager.FindByEmailAsync(model.Email);
 
-            if (!await _userManager.CheckPasswordAsync(dbUser, model.Password))
+            if(dbUser == null)
             {
-                return null;
+                LoginResponse response = new()
+                {
+                    Token = null,
+                    Errors = new List<string> { "User does not exist" },
+                    StatusMessage = "Failed"
+                };
+                return response;
             }
 
+            if (!await _userManager.CheckPasswordAsync(dbUser, model.Password))
+            {
+                LoginResponse response = new()
+                {
+                    Token = null,
+                    Errors = new List<string> { "Invalid password" },
+                    StatusMessage = "Failed"
+                };
+                return response;
+            } 
+            
             var roles = await _userManager.GetRolesAsync(dbUser);
 
-            return GenerateJwtToken(dbUser.UserName, (List<string>)roles);
+            string token = GenerateJwtToken(dbUser.UserName, roles.ToList());
+
+            LoginResponse loginResponse = new()
+            {
+                Token = token,
+                Errors = null,
+                StatusMessage = "Success"
+            };
+
+            return  loginResponse;
 
         }
 
-        public async Task<ApiResponse> RegisterAsync(RegisterDto model)
+        public async Task<RegisterResponse> RegisterAsync(RegisterDto model)
         {
             AppUser user = _mapper.Map<AppUser>(model);
 
@@ -50,7 +113,7 @@ namespace Service.Service.Implementation
 
             if (!result.Succeeded)
             {
-                ApiResponse response = new()
+                RegisterResponse response = new()
                 {
                     Errors = result.Errors.Select(m => m.Description).ToList(),
                     StatusMessage = "Failed"
@@ -59,7 +122,10 @@ namespace Service.Service.Implementation
                 return response;
             }
 
-            return new ApiResponse { Errors = null, StatusMessage = "Success" };
+            await _userManager.AddToRoleAsync(user, Roles.Member.ToString());
+
+             
+            return new RegisterResponse { Errors = null, StatusMessage = "Success" };
         }
 
 
@@ -77,13 +143,13 @@ namespace Service.Service.Implementation
                 claims.Add(new Claim(ClaimTypes.Role, role));
             });
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSetting.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(_configuration["Jwt:ExpireDays"]));
+            var expires = DateTime.Now.AddDays(Convert.ToDouble(_jwtSetting.ExpireDays));
 
             var token = new JwtSecurityToken(
-                _configuration["Jwt:Issuer"],
-                _configuration["Jwt:Auidience"],
+                _jwtSetting.Issuer,
+                _jwtSetting.Auidience,
                 claims,
                 expires: expires,
                 signingCredentials: creds

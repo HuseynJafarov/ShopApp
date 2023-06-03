@@ -19,7 +19,6 @@ namespace shop.App.Controllers
         public async Task<IActionResult> Create([FromBody] EventCreateAndUpdateDto data)
         {
             await _eventService.CreateAsync(data);
-
             return Ok();
         }
 
