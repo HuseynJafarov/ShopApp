@@ -11,5 +11,6 @@ namespace Domain.Common
         public int Id { get; set; }
         public bool SoftDeleted { get; set; }
         public DateTime Date { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }

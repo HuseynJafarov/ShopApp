@@ -46,9 +46,9 @@ namespace Repository.Data
                     case EntityState.Added:
                         entity.Entity.Date = DateTime.UtcNow.AddHours(4);
                         break;
-                    //case EntityState.Modified:
-                    //    entity.Entity.UpdateDate = DateTime.UtcNow.AddHours(4);
-                    //    break;
+                    case EntityState.Modified:
+                        entity.Entity.UpdateDate = DateTime.UtcNow.AddHours(4);
+                        break;
                     case EntityState.Deleted:
                         entity.Entity.SoftDeleted = true;
                         break;
