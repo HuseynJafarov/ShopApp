@@ -20,13 +20,13 @@ namespace Service.Service.Implementation
 
         public async Task CreateAsync(ServicesCreateAndUpdateDto services)
         {
-            await _repo.Create(_mapper.Map<Services>(services));
+            await _repo.Create(_mapper.Map<Domain.Entities.Services>(services));
 
         }
 
         public async Task DeleteAsync(int id)
         {
-            Services services = await _repo.Get(id);
+            Domain.Entities.Services services = await _repo.Get(id);
             await _repo.Delete(services);
         }
 
@@ -37,7 +37,7 @@ namespace Service.Service.Implementation
 
         public async Task<List<ServicesListDto>> SerachAsync(string? searchText)
         {
-            List<Services> searchDatas = new();
+            List<Domain.Entities.Services> searchDatas = new();
             if (searchText != null)
             {
                 searchDatas = await _repo.FindAllAsync(m => m.Title.Contains(searchText) && m.Description.Contains(searchText));
@@ -54,7 +54,7 @@ namespace Service.Service.Implementation
         public async Task SoftDeleteAsync(int id)
         {
 
-            Services services = await _repo.Get(id);
+            Domain.Entities.Services services = await _repo.Get(id);
             await _repo.SoftDelete(services);
         }
 

@@ -12,6 +12,7 @@ namespace Service.Service.Interface
     {
         Task CreateAsync(CartCreateAndUpdateDto cart);
         Task<List<CartListDto>> GetAllAsync();
+        Task<List<CartListDto>> GetAllAsyncWithAuthor();
         Task DeleteAsync(int id);
         Task SoftDeleteAsync(int id);
         Task UpdateAsync(int id, CartCreateAndUpdateDto cart);

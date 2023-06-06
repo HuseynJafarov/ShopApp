@@ -38,6 +38,12 @@ namespace Service.Service.Implementation
             return _mapper.Map<List<CartListDto>>(await _repo.GetAll());
         }
 
+        public async Task<List<CartListDto>> GetAllAsyncWithAuthor()
+        {
+            var data = _mapper.Map<List<CartListDto>>(await _repo.GetAllWithAuthor());
+            return data;
+        }
+
         public async Task<List<CartListDto>> SerachAsync(string? searchText)
         {
             List<Carts> searchDatas = new();

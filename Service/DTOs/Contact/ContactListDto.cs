@@ -14,6 +14,5 @@ namespace Service.DTOs.Contact
         public string? Location { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
-        public DateTime CreatedDate { get; set; }
     }
 }

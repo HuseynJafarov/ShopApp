@@ -8,7 +8,7 @@ namespace Service.DTOs.Setting
 {
     public class SettingCreateAndUpdateDto
     {
-        public byte[] Logo { get; set; }
+        public byte[]? Logo { get; set; }
         public string? SiteName { get; set; }
         public string? Description { get; set; }
     }

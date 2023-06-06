@@ -13,7 +13,5 @@ namespace Service.DTOs.HeroSlider
         public byte[]? Image { get; set; }
         public string? Student { get; set; }
         public string? StudentStatus { get; set; }
-        public DateTime CreatedDate { get; set; }
-
     }
 }
