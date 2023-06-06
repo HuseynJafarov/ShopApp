@@ -11,7 +11,7 @@ namespace Service.Service.Interface
         Task<List<AuthorListDto>> GetAllAsync();
         Task DeleteAsync(int id);
         Task SoftDeleteAsync(int id);
-        Task UpdateAsync(int id, AuthorCreateAndUpdateDto slider);
+        Task UpdateAsync(int id, AuthorCreateAndUpdateDto data);
         Task<List<AuthorListDto>> SerachAsync(string? searchText);
     }
 }

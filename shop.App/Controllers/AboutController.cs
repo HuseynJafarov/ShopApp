@@ -13,7 +13,6 @@ namespace shop.App.Controllers
         public AboutController(IAboutService aboutService)
         {
             _aboutService = aboutService;
-      
         }
 
 
@@ -42,7 +41,6 @@ namespace shop.App.Controllers
             { 
                 return NotFound();
             }
-
         }
 
         [HttpPost]

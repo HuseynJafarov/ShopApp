@@ -20,32 +20,45 @@ namespace Service.Service.Implementation
 
         public async Task CreateAsync(StudentCreateAndUpdateDto data)
         {
-            return await _repo.Create(_mapper.Map<Student>(data));
+             await _repo.Create(_mapper.Map<Student>(data));
         }
 
         public async Task DeleteAsync(int id)
         {
-            return await _repo.Delete(await _repo.Get(id));
+             await _repo.Delete(await _repo.Get(id));
         }
 
-        public Task<List<StudentListDto>> GetAllAsync()
+        public async Task<List<StudentListDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return  _mapper.Map<List<StudentListDto>>(await _repo.GetAll());
         }
 
-        public Task<List<StudentListDto>> SerachAsync(string? searchText)
+        public async Task<List<StudentListDto>> SerachAsync(string? searchText)
         {
-            throw new NotImplementedException();
+            List<Student> searchDatas = new();
+            if (searchText != null)
+            {
+                searchDatas = await _repo.FindAllAsync(x => x.FullName.Contains(searchText)
+                               && x.Info.Contains(searchText));
+            }
+            else
+            {
+                searchDatas = await _repo.GetAll();
+            }
+
+            return _mapper.Map<List<StudentListDto>>(searchDatas);
         }
 
-        public Task SoftDeleteAsync(int id)
+        public async Task SoftDeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await _repo.SoftDelete(await _repo.Get(id));
         }
 
-        public Task UpdateAsync(int id, StudentCreateAndUpdateDto data)
+        public async Task UpdateAsync(int id, StudentCreateAndUpdateDto data)
         {
-            throw new NotImplementedException();
+            Student dbStudent = await (_repo.Get(id));
+            _mapper.Map(data, dbStudent);
+            await _repo.Update(dbStudent);
         }
     }
 }
