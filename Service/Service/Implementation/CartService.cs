@@ -38,15 +38,17 @@ namespace Service.Service.Implementation
             await _repo.Delete(carts);
         }
 
-        public async Task<List<CartListDto>> GetAllAsync()
-        {
-            var data = _mapper.Map<List<CartListDto>>(await _repo.GetAll());
-            return data;
-        }
+       
 
         public async Task<List<CartListDto>> GetAllAsyncWithAuthor()
         {
-            var data = _mapper.Map<List<CartListDto>>(await _repo.GetAllWithAuthor());
+            var dbData = await _repo.GetAllWithAuthor();
+           
+            //var newdata = dbData.Select(d=>new CartListDto
+            //{
+            //    Image = Convert.ToBase64String(d.Image)
+            //}).ToList();
+            var data = _mapper.Map<List<CartListDto>>(dbData);
             return data;
         }
 

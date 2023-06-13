@@ -24,11 +24,6 @@ namespace shop.App.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            return Ok(await _cartService.GetAllAsync());
-        }
 
         [HttpGet]
         public async Task<IActionResult> GetAllWithAuthor()
