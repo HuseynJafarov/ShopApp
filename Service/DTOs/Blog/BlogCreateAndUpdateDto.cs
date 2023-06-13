@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.DTOs.HeroSlider
+namespace Service.DTOs.Blog
 {
-    public class HeroSliderCreateAndUpdateDto
+    public class BlogCreateAndUpdateDto
     {
+
+        public string? Title { get; set; }
         public string? Description { get; set; }
         public byte[]? Image { get; set; }
-        public string? Student { get; set; }
-        public string? StudentStatus { get; set; }
+        public int AuthorId { get; set; }
     }
 }

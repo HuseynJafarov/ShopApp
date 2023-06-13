@@ -13,5 +13,6 @@ namespace Domain.Entities
         public byte[]? Image { get; set; }
         public string? Position { get; set; }
         public ICollection<CartAuthor>? CartAuthors { get; set; }
+        public Blog? Blog { get; set; }
     }
 }

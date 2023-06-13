@@ -13,13 +13,9 @@ namespace Domain.Configuration
     {
         public void Configure(EntityTypeBuilder<Settings> builder)
         {
-            builder.Property(x => x.SiteName).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.SiteName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Description).IsRequired().HasMaxLength(250);
             builder.Property(x => x.Logo).IsRequired();
-            builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
-            builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
-
-            builder.HasQueryFilter(m => !m.SoftDeleted);
         }
     }
 }

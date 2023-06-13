@@ -14,6 +14,7 @@ namespace Service.DTOs.Cart
         public string? Description { get; set; }
         public byte[]? Image { get; set; }
         public double Price { get; set; }
-        public ICollection<CartAuthor>? CartAuthors { get; set; }
+        public List<string> AuthorName { get; set; }
+
     }
 }

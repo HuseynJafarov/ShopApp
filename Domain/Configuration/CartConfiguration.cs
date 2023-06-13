@@ -13,8 +13,8 @@ namespace Domain.Configuration
     {
         public void Configure(EntityTypeBuilder<Carts> builder)
         {
-            builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Title).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.Description).IsRequired().HasMaxLength(250);
             builder.Property(x=> x.Price).IsRequired().HasPrecision(18,2);
             builder.Property(x => x.Image).IsRequired();
         }

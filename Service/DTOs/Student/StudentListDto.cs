@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Service.DTOs.Cart;
 
 namespace Service.DTOs.Student
 {
@@ -10,6 +11,6 @@ namespace Service.DTOs.Student
         public string? Info { get; set; }
         public bool IsGraduated { get; set; }
         public int CartId { get; set; }
-        public Carts? Carts { get; set; }
+        public CartListDto? CartsList { get; set; }
     }
 }

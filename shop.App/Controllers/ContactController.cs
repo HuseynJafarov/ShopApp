@@ -16,7 +16,6 @@ namespace shop.App.Controllers
             _contactService = contactService;
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Create(ContactCreateAndUpdateDto contact)
         {
@@ -27,7 +26,6 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            
             return Ok(await _contactService.GetAllAsync());
         }
 
@@ -41,7 +39,6 @@ namespace shop.App.Controllers
             }
             catch (NullReferenceException)
             {
-
                 return NotFound();
             }
         }

@@ -12,6 +12,6 @@ namespace Service.DTOs.Author
         public string? Name { get; set; }
         public byte[]? Image { get; set; }
         public string? Position { get; set; }
-        public ICollection<CartAuthor>? CartAuthors { get; set; }
+
     }
 }

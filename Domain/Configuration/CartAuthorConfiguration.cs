@@ -13,12 +13,8 @@ namespace Domain.Configuration
     {
         public void Configure(EntityTypeBuilder<CartAuthor> builder)
         {
-            builder.Property(x => x.CartsId).IsRequired();
-            builder.Property(x => x.AuthorId).IsRequired();
-            builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
-            builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
-
-            builder.HasQueryFilter(m => !m.SoftDeleted);
+            //builder.Property(x => x.CartsId).IsRequired();
+            //builder.Property(x => x.AuthorId).IsRequired();
         }
     }
 }

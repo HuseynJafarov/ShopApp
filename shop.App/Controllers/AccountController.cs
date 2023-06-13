@@ -53,7 +53,7 @@ namespace shop.App.Controllers
             return Ok(await _accountService.GetRolesByUserAsync(userId));
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         public async Task<IActionResult> GetRoles()

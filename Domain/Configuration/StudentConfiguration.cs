@@ -14,15 +14,10 @@ namespace Domain.Configuration
         public void Configure(EntityTypeBuilder<Student> builder)
         {
             builder.Property(x => x.FullName).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Info).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.Info).IsRequired().HasMaxLength(250);
             builder.Property(x => x.IsGraduated).IsRequired().HasDefaultValue(false);
             builder.Property(x => x.Image).IsRequired();
             builder.Property(x => x.CartId).IsRequired();
-            builder.Property(m => m.SoftDeleted).IsRequired().HasDefaultValue(false);
-            builder.Property(m => m.Date).IsRequired().HasDefaultValue(DateTime.UtcNow);
-
-            builder.HasQueryFilter(m => !m.SoftDeleted);
-            builder.HasQueryFilter(m => !m.IsGraduated);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace shop.App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CartCreateAndUpdateDto cart)
+        public async Task<IActionResult> Create([FromForm] CartCreateAndUpdateDto cart)
         {
             await _cartService.CreateAsync(cart);
 
@@ -33,7 +33,8 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllWithAuthor()
         {
-            return Ok(await _cartService.GetAllAsyncWithAuthor());
+            var data = await _cartService.GetAllAsyncWithAuthor();
+            return Ok(data);
         }
 
         [HttpDelete]

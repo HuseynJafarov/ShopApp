@@ -2,10 +2,10 @@
 using Domain.Entities;
 using Service.DTOs.About;
 using Service.DTOs.Author;
+using Service.DTOs.Blog;
 using Service.DTOs.Cart;
 using Service.DTOs.Contact;
 using Service.DTOs.Event;
-using Service.DTOs.HeroSlider;
 using Service.DTOs.Services;
 using Service.DTOs.Setting;
 using Service.DTOs.Slider;
@@ -29,8 +29,13 @@ namespace Service.Mappings
             CreateMap<Author, AuthorListDto>();
             CreateMap<AuthorCreateAndUpdateDto, Author>().ReverseMap();
 
+            CreateMap<BlogCreateAndUpdateDto, Blog>();
+            CreateMap<Blog, BlogListDto>();
+            CreateMap<BlogCreateAndUpdateDto, Blog>().ReverseMap();
+
             CreateMap<CartCreateAndUpdateDto, Carts>();
-            CreateMap<Carts,CartListDto>();
+            CreateMap<Carts, CartListDto>()
+                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.CartAuthors.Where(m=>m.CartsId == src.Id).Select(d=>d.Author.Name)));
             CreateMap<CartCreateAndUpdateDto,Carts>().ReverseMap();
 
             CreateMap<ContactCreateAndUpdateDto, Contact>();
@@ -40,17 +45,13 @@ namespace Service.Mappings
             CreateMap<EventCreateAndUpdateDto, Events>();
             CreateMap<Events,EventListDto>();
             CreateMap<EventCreateAndUpdateDto,Events>().ReverseMap();
-
-            CreateMap<HeroSliderCreateAndUpdateDto, HeroSliders>();
-            CreateMap<HeroSliders,HeroSliderListDto>();
-            CreateMap<HeroSliderCreateAndUpdateDto, HeroSliders>().ReverseMap();
-
+        
             CreateMap<ServicesCreateAndUpdateDto, Domain.Entities.Services>();
             CreateMap<Domain.Entities.Services, ServicesListDto>();
             CreateMap<ServicesCreateAndUpdateDto, Domain.Entities.Services>().ReverseMap();
 
             CreateMap<SettingCreateAndUpdateDto, Settings>();
-            CreateMap<Settings, ServicesCreateAndUpdateDto>();
+            CreateMap<Settings, SettingListDto>();
             CreateMap<SettingCreateAndUpdateDto, Settings>().ReverseMap();
 
             CreateMap<SliderCreateAndUpdateDto, Slider>();

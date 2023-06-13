@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Repository.Repositories.Interface;
 using Service.DTOs.Cart;
+using Service.Helpers;
 using Service.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,10 @@ namespace Service.Service.Implementation
 
         public async Task CreateAsync(CartCreateAndUpdateDto cart)
         {
-           await _repo.Create(_mapper.Map<Carts>(cart));
+            var mappedDatas = _mapper.Map<Carts>(cart);
+            mappedDatas.Image = await cart.Photo.GetBytes();
+
+            await _repo.Create(mappedDatas);
         }
 
         public async Task DeleteAsync(int id)
@@ -35,7 +40,8 @@ namespace Service.Service.Implementation
 
         public async Task<List<CartListDto>> GetAllAsync()
         {
-            return _mapper.Map<List<CartListDto>>(await _repo.GetAll());
+            var data = _mapper.Map<List<CartListDto>>(await _repo.GetAll());
+            return data;
         }
 
         public async Task<List<CartListDto>> GetAllAsyncWithAuthor()

@@ -1,33 +1,31 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Service.DTOs.Event;
-using Service.DTOs.HeroSlider;
+using Service.DTOs.Blog;
+using Service.Service.Implementation;
 using Service.Service.Interface;
 using System.ComponentModel.DataAnnotations;
 
 namespace shop.App.Controllers
 {
-    public class HeroSliderController :AppController
+    public class BlogController: AppController
     {
-        private readonly IHeroSliderService _heroSliderService;
+        private readonly IBlogService _service;
 
-        public HeroSliderController(IHeroSliderService heroSlider)
+        public BlogController(IBlogService service)
         {
-            _heroSliderService = heroSlider;
+            _service = service;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] HeroSliderCreateAndUpdateDto data)
+        public async Task<IActionResult> Create([FromBody] BlogCreateAndUpdateDto blog)
         {
-            await _heroSliderService.CreateAsync(data);
-
+            await _service.CreateAsync(blog);
             return Ok();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            
-            return Ok(await _heroSliderService.GetAllAsync());
+            return Ok(await _service.GetAllAsync());
         }
 
         [HttpDelete]
@@ -35,40 +33,37 @@ namespace shop.App.Controllers
         {
             try
             {
-                await _heroSliderService.DeleteAsync(id);
+                await _service.DeleteAsync(id);
                 return Ok();
             }
             catch (NullReferenceException)
             {
-
                 return NotFound();
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> SoftDelete([Required] int id)
+        public async Task<IActionResult> SoftDeleted([Required] int id)
         {
             try
             {
-                await _heroSliderService.SoftDeleteAsync(id);
+                await _service.SoftDeleteAsync(id);
                 return Ok();
             }
             catch (NullReferenceException)
             {
-
                 return NotFound();
             }
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute][Required] int id, HeroSliderCreateAndUpdateDto data)
+        public async Task<IActionResult> Update([FromRoute][Required] int id ,BlogCreateAndUpdateDto data)
         {
             try
             {
-                await _heroSliderService.UpdateAsync(id, data);
+                await _service.UpdateAsync(id, data);
                 return Ok();
-
             }
             catch (NullReferenceException)
             {
@@ -78,10 +73,10 @@ namespace shop.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string? searchText)
+        public async Task<IActionResult> Search(string? search)
         {
-            
-            return Ok(await _heroSliderService.SerachAsync(searchText));
+            return Ok(await _service.SerachAsync(search));
         }
+
     }
 }

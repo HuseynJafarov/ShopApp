@@ -9,6 +9,7 @@ using Repository.Repositories.Interface;
 using Service.Mappings;
 using Service.Service.Implementation;
 using Service.Service.Interface;
+using Services.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -65,7 +66,10 @@ namespace shop.App
             builder.Services.AddScoped<IAboutService, AboutService>();
 
             builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-            //builder.Services.AddScoped<IAuthorService, AuthorService>();
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
+
+            builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+            builder.Services.AddScoped<IBlogService, BlogService>();
 
             builder.Services.AddScoped<ICartsRepository, CartsRepository>();
             builder.Services.AddScoped<ICartService, CartService>();
@@ -76,8 +80,6 @@ namespace shop.App
             builder.Services.AddScoped<IEventsRepository, EventsRepository>();
             builder.Services.AddScoped<IEventService, EventService>();
 
-            builder.Services.AddScoped<IHeroSlidersRepository, HeroSlidersRepository>();
-            builder.Services.AddScoped<IHeroSliderService, HeroSliderService>();
 
             builder.Services.AddScoped<IServicesRepository, ServicesRepository>();
             builder.Services.AddScoped<IServicesService, ServicesService>();
@@ -100,10 +102,11 @@ namespace shop.App
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<IStudentService, StudentService>();
 
-            //builder.Services.AddScoped<IAccountService, AccountService>();
+            builder.Services.AddScoped<IAccountService, AccountService>();
 
 
-
+            builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("JwT"));
+            builder.Services.AddScoped<JWTSettings>();
 
             builder.Services.AddCors(options =>
             {
@@ -130,6 +133,8 @@ namespace shop.App
             app.UseCors("mycors");
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

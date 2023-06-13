@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class HeroSliders:BaseEntity
+    public class Blog:BaseEntity
     {
+        public string? Title { get; set; }
         public string? Description { get; set; }
         public byte[]? Image { get; set; }
-        public string? Student { get; set; }
-        public string? StudentStatus { get; set; }
+        public Author? Author { get; set; }
+        public int AuthorId { get; set; }
     }
 }

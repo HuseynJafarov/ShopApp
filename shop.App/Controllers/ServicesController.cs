@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Service.DTOs.HeroSlider;
 using Service.DTOs.Services;
 using Service.Service.Interface;
 using System.ComponentModel.DataAnnotations;
