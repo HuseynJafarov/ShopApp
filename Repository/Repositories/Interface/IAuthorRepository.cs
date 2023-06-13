@@ -5,7 +5,7 @@ namespace Repository.Repositories.Interface
 {
     public interface IAuthorRepository :IRepository<Author>
     {
-        Task<List<Author>> GetAllWithCart();
+        Task<List<Author>> GetAllNew();
         
     }
 }

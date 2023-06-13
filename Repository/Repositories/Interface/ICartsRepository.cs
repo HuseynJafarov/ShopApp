@@ -10,7 +10,7 @@ namespace Repository.Repositories.Interface
 {
     public interface ICartsRepository : IRepository<Carts>
     {
-        Task<List<Carts>> GetAllWithAuthor();
+        Task<List<Carts>> GetAllNew();
   
     }
 }

@@ -19,17 +19,30 @@ namespace shop.App.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CartCreateAndUpdateDto cart)
         {
-            await _cartService.CreateAsync(cart);
-
-            return Ok();
+            try
+            {
+                 await _cartService.CreateAsync(cart);
+                 return Ok();
+            }
+              catch (NullReferenceException)
+            {
+                return BadRequest(new { ErrorMessage = "Not Created" });
+            }
         }
 
 
         [HttpGet]
         public async Task<IActionResult> GetAllWithAuthor()
         {
-            var data = await _cartService.GetAllAsyncWithAuthor();
-            return Ok(data);
+            try
+            {
+                var data = await _cartService.GetAllAsync();
+                return Ok(data);
+            }
+            catch (Exception)
+            {
+                return NotFound("No records found!");
+            }
         }
 
         [HttpDelete]
@@ -64,7 +77,7 @@ namespace shop.App.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute][Required]int id,CartCreateAndUpdateDto cart)
+        public async Task<IActionResult> Update([FromRoute][Required]int id, [FromForm]CartCreateAndUpdateDto cart)
         {
             try
             {
@@ -82,7 +95,7 @@ namespace shop.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string? searchText)
         {
-               
+
                 return Ok(await _cartService.SerachAsync(searchText));
         }
     }

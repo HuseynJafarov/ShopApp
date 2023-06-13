@@ -35,7 +35,7 @@ namespace Service.Service.Implementation
 
         public async Task<List<CartListDto>> GetAllAsyncWithCarts()
         {
-           return _mapper.Map<List<CartListDto>>(await _repo.GetAllWithCart());
+           return _mapper.Map<List<CartListDto>>(await _repo.GetAllNew());
         }
 
         public async Task<List<AuthorListDto>> SerachAsync(string? searchText)

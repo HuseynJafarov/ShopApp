@@ -26,7 +26,8 @@ namespace Service.Mappings
             CreateMap<AboutCreateAndUpdateDto, About>().ReverseMap();
 
             CreateMap<AuthorCreateAndUpdateDto, Author>();
-            CreateMap<Author, AuthorListDto>();
+            CreateMap<Author, AuthorListDto>().ForMember(dest => dest.Image, opt => opt
+            .MapFrom(src => Convert.ToBase64String(src.Image)));
             CreateMap<AuthorCreateAndUpdateDto, Author>().ReverseMap();
 
             CreateMap<BlogCreateAndUpdateDto, Blog>();

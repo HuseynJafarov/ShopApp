@@ -17,9 +17,14 @@ namespace Repository.Repositories.Implementation
             _entities = _context.Set<Carts>();
         }
 
-        public async Task<List<Carts>> GetAllWithAuthor()
+        public async Task<List<Carts>> GetAllNew()
         {
-            var data = await _entities.Include(x => x.CartAuthors).ThenInclude(x => x.Author).ToListAsync();
+            var data = await _entities
+                .Where(a => !a.SoftDeleted)
+                .Include(x => x.CartAuthors)
+                .ThenInclude(x => x.Author)
+                .ToListAsync();
+
             return data;
         }
 

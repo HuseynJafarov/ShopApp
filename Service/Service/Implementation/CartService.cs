@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using Repository.Repositories.Implementation;
 using Repository.Repositories.Interface;
 using Service.DTOs.Cart;
 using Service.Helpers;
 using Service.Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Service.Implementation
 {
@@ -17,19 +14,50 @@ namespace Service.Service.Implementation
     {
         private readonly ICartsRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IAuthorRepository _authorRepo;
 
-        public CartService(ICartsRepository repo, IMapper mapper)
+        public CartService(ICartsRepository repo, IMapper mapper, IAuthorRepository authorRepo)
         {
             _repo = repo;
             _mapper = mapper;
+            _authorRepo = authorRepo;
+
         }
 
         public async Task CreateAsync(CartCreateAndUpdateDto cart)
         {
-            var mappedDatas = _mapper.Map<Carts>(cart);
-            mappedDatas.Image = await cart.Photo.GetBytes();
+          
 
-            await _repo.Create(mappedDatas);
+            if(cart.AuthorIds != null && cart.AuthorIds.Any())
+            {
+                var authors = await _authorRepo.FindAllAsync(a => cart.AuthorIds.Contains(a.Id));
+
+                var mapCart = _mapper.Map<Carts>(cart);
+                mapCart.Image = await cart.Photo.GetBytes();
+                mapCart.CartAuthors = new List<CartAuthor>();
+
+                foreach (var author in authors)
+                {
+                    var cartAuthor = new CartAuthor
+                    {
+                        Carts = mapCart,
+                        Author = author
+                    };
+                    mapCart.CartAuthors.Add(cartAuthor);
+                }
+
+                await _repo.Create(mapCart);
+            }
+            else
+            {
+                throw new Exception("You must select at least one author.");
+            }
+
+            #region oldCreate
+            //var mappedDatas = _mapper.Map<Carts>(cart);
+            //mappedDatas.Image = await cart.Photo.GetBytes(); 
+            //await _repo.Create(mappedDatas);
+            #endregion
         }
 
         public async Task DeleteAsync(int id)
@@ -40,9 +68,9 @@ namespace Service.Service.Implementation
 
        
 
-        public async Task<List<CartListDto>> GetAllAsyncWithAuthor()
+        public async Task<List<CartListDto>> GetAllAsync()
         {
-            var dbData = await _repo.GetAllWithAuthor();
+            var dbData = await _repo.GetAllNew();
            
             //var newdata = dbData.Select(d=>new CartListDto
             //{
@@ -75,9 +103,39 @@ namespace Service.Service.Implementation
 
         public async Task UpdateAsync(int id, CartCreateAndUpdateDto cart)
         {
-            var dbCart = await _repo.Get(id);
-            _mapper.Map(cart, dbCart);
-            await _repo.Update(dbCart);
+            var existingCart = await _repo.Get(id);
+            if (existingCart == null)
+            {
+                throw new Exception("Cart not found");
+            }
+
+            if (cart.AuthorIds != null && cart.AuthorIds.Any())
+            {
+                var authors = await _authorRepo.FindAllAsync(a => cart.AuthorIds.Contains(a.Id));
+
+                existingCart.Title = cart.Title;
+                existingCart.Description = cart.Description;
+                existingCart.Image = await cart.Photo.GetBytes();
+
+                // Remove existing cart authors
+                existingCart.CartAuthors.Clear();
+
+                foreach (var author in authors)
+                {
+                    var cartAuthor = new CartAuthor
+                    {
+                        Carts = existingCart,
+                        Author = author
+                    };
+                    existingCart.CartAuthors.Add(cartAuthor);
+                }
+
+                await _repo.Update(existingCart);
+            }
+            else
+            {
+                throw new Exception("You must select at least one author.");
+            }
         }
     }
 }

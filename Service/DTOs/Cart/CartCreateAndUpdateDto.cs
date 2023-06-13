@@ -13,6 +13,7 @@ namespace Service.DTOs.Cart
         public string? Description { get; set; }
         public IFormFile Photo { get; set; }
         public double Price { get; set; }
+        public List<int>? AuthorIds { get; set; }
     }
 
 }
