@@ -15,6 +15,7 @@ namespace Service.Service.Implementation
         private readonly ICartsRepository _repo;
         private readonly IMapper _mapper;
         private readonly IAuthorRepository _authorRepo;
+       
 
         public CartService(ICartsRepository repo, IMapper mapper, IAuthorRepository authorRepo)
         {
@@ -121,12 +122,17 @@ namespace Service.Service.Implementation
 
                 foreach (var author in authors)
                 {
-                    var cartAuthor = new CartAuthor
+                    if(mapCart.CartAuthors.Any(a=>a.AuthorId == author.Id))
                     {
-                        Carts = mapCart,
-                        AuthorId = author.Id
-                    };
-                    mapCart.CartAuthors.Add(cartAuthor);
+                        var cartAuthor = new CartAuthor
+                        {
+                            Carts = mapCart,
+
+                            AuthorId = (await GetById(author.Id)).Id
+                        };
+                        mapCart.CartAuthors.Add(cartAuthor);
+
+                    }
                 }
                 _mapper.Map(cart, mapCart);
                 await _repo.Update(mapCart);
