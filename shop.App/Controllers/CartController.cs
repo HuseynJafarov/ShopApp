@@ -45,6 +45,21 @@ namespace shop.App.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetWithAuthor([Required] int id)
+        {
+            try
+            {
+                var data = await _cartService.GetById(id);
+                return Ok(data);
+            }
+            catch (Exception)
+            {
+
+                return NotFound("No records found!");
+            }
+        }
+
         [HttpDelete]
         public async Task<IActionResult> Delete([Required] int id)
         {

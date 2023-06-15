@@ -37,9 +37,11 @@ namespace Repository.Repositories.Implementation
 
         public async Task<List<T>> FindAllAsync(Expression<Func<T, bool>> expression)
         {
-            return await _entities.Where(expression).ToListAsync();
-        }
+            var data = await _entities.Where(expression).AsNoTracking().ToListAsync();
 
+            return data;
+        }
+            
         public async Task<T> Get(int id)
         {
             T entity = await _entities.FindAsync(id) ?? throw new NotImplementedException();
@@ -48,7 +50,7 @@ namespace Repository.Repositories.Implementation
 
         public async Task<List<T>> GetAll()
         {
-            return await _entities.ToListAsync();
+            return await _entities.AsNoTracking().ToListAsync();
         }
 
         public async Task SoftDelete(T entity)
@@ -63,7 +65,7 @@ namespace Repository.Repositories.Implementation
         public async Task Update(T entity)
         {
             if (entity == null) throw new NullReferenceException();
-
+                
             _entities.Update(entity);
             await _context.SaveChangesAsync();
         }

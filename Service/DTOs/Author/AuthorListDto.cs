@@ -9,5 +9,7 @@ namespace Service.DTOs.Author
         public string? Name { get; set; }
         public string? Image { get; set; }
         public string? Position { get; set; }
+        public List<string>? CartName { get; set; }
+        public string? BlogName { get; set; }
     }
 }

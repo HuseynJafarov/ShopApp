@@ -1,17 +1,13 @@
-﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Service.DTOs.Author
 {
     public class AuthorCreateAndUpdateDto
     {
         public string? Name { get; set; }
-        public byte[]? Image { get; set; }
+        public IFormFile Photo { get; set; }
         public string? Position { get; set; }
-
+        public List<int>? CartIds { get; set; }
+        public int BlogId { get; set; }
     }
 }

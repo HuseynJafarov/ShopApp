@@ -36,9 +36,9 @@ namespace Service.Mappings
 
             CreateMap<CartCreateAndUpdateDto, Carts>();
             CreateMap<Carts, CartListDto>()
-                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.CartAuthors.Where(m=>m.CartsId == src.Id).Select(d=>d.Author.Name)))
+                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.CartAuthors.Where(m => m.CartsId == src.Id).Select(d => d.Author.Name)))
                 .ForMember(dest => dest.Image, opt => opt.MapFrom(src => Convert.ToBase64String(src.Image)));
-            CreateMap<CartCreateAndUpdateDto,Carts>().ReverseMap();
+            CreateMap<CartCreateAndUpdateDto, Carts>().ReverseMap();
 
             CreateMap<ContactCreateAndUpdateDto, Contact>();
             CreateMap<Contact, ContactListDto>();

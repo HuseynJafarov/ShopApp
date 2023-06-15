@@ -11,6 +11,6 @@ namespace Repository.Repositories.Interface
     public interface ICartsRepository : IRepository<Carts>
     {
         Task<List<Carts>> GetAllNew();
-  
+        Task<Carts> GetNew(int id);
     }
 }
