@@ -7,6 +7,5 @@ namespace Repository.Repositories.Interface
     {
         Task<List<Carts>> GetAllCartAuthor();
         Task<Carts> GetByIdCartAuthor(int id);
-        Task DeleteCartAuthor(List<CartAuthor> cartAuthors);
     }
 }

@@ -13,14 +13,14 @@ namespace Service.Service.Implementation
         private readonly ICartsRepository _repo;
         private readonly IMapper _mapper;
         private readonly IAuthorRepository _authorRepo;
+        private readonly ICartAuthorRepository _cartAuthorRepo;
 
-
-        public CartService(ICartsRepository repo, IMapper mapper, IAuthorRepository authorRepo)
+        public CartService(ICartAuthorRepository cartAuthorRepository,ICartsRepository repo, IMapper mapper, IAuthorRepository authorRepo)
         {
             _repo = repo;
             _mapper = mapper;
             _authorRepo = authorRepo;
-
+            _cartAuthorRepo = cartAuthorRepository;
         }
 
         public async Task CreateAsync(CartCreateAndUpdateDto cart)
@@ -63,8 +63,6 @@ namespace Service.Service.Implementation
             await _repo.Delete(carts);
         }
 
-
-
         public async Task<List<CartListDto>> GetAllAsync()
         {
             var dbData = await _repo.GetAllCartAuthor();
@@ -72,8 +70,6 @@ namespace Service.Service.Implementation
             var data = _mapper.Map<List<CartListDto>>(dbData);
             return data;
         }
-
-
 
         public async Task<List<CartListDto>> SerachAsync(string? searchText)
         {
@@ -108,19 +104,16 @@ namespace Service.Service.Implementation
                 mapCart.CartAuthors = new List<CartAuthor>();
                 var cartAuthor1 = await _repo.GetByIdCartAuthor(id);
 
-                await _repo.DeleteCartAuthor(cartAuthor1.CartAuthors.ToList());
+                await _cartAuthorRepo.DeleteCartAuthor(cartAuthor1.CartAuthors.ToList());
 
                 foreach (var author in authors)
                 {
-                   
                         var cartAuthor = new CartAuthor
                         {
                             CartsId = id,
                             AuthorId = (await GetByIdAsync(author.Id)).Id
                         };
                         mapCart.CartAuthors.Add(cartAuthor);
-
-                   
                 }
                 _mapper.Map(cart, mapCart);
                 await _repo.Update(mapCart);
