@@ -30,8 +30,6 @@ namespace Service.Service.Implementation
             {
                 var authors = await _authorRepo.FindAllAsync(a => cart.AuthorIds.Contains(a.Id));
 
-               
-
                 var mapCart = _mapper.Map<Carts>(cart);
                 mapCart.Image = await cart.Photo.GetBytes();
                 mapCart.CartAuthors = new List<CartAuthor>();
@@ -69,12 +67,8 @@ namespace Service.Service.Implementation
 
         public async Task<List<CartListDto>> GetAllAsync()
         {
-            var dbData = await _repo.GetAllNew();
+            var dbData = await _repo.GetAllCartAuthor();
 
-            //var newdata = dbData.Select(d=>new CartListDto
-            //{
-            //    Image = Convert.ToBase64String(d.Image)
-            //}).ToList();
             var data = _mapper.Map<List<CartListDto>>(dbData);
             return data;
         }
@@ -112,7 +106,7 @@ namespace Service.Service.Implementation
                 mapCart.Id = id;
                 mapCart.Image = await cart.Photo.GetBytes();
                 mapCart.CartAuthors = new List<CartAuthor>();
-                var cartAuthor1 = await _repo.GetNew(id);
+                var cartAuthor1 = await _repo.GetByIdCartAuthor(id);
 
                 await _repo.DeleteCartAuthor(cartAuthor1.CartAuthors.ToList());
 
@@ -122,7 +116,7 @@ namespace Service.Service.Implementation
                         var cartAuthor = new CartAuthor
                         {
                             CartsId = id,
-                            AuthorId = (await GetById(author.Id)).Id
+                            AuthorId = (await GetByIdAsync(author.Id)).Id
                         };
                         mapCart.CartAuthors.Add(cartAuthor);
 
@@ -137,12 +131,9 @@ namespace Service.Service.Implementation
             }
         }
 
-
-
-
-        public async Task<CartListDto> GetById(int id)
+        public async Task<CartListDto> GetByIdAsync(int id)
         {
-            var dbData = await _repo.GetNew(id);
+            var dbData = await _repo.GetByIdCartAuthor(id);
 
             var data = _mapper.Map<CartListDto>(dbData);
             return data;

@@ -19,7 +19,7 @@ namespace Repository.Repositories.Implementation
             _entityCartAuthor = _context.Set<CartAuthor>();
         }
 
-        public async Task<List<Carts>> GetAllNew()
+        public async Task<List<Carts>> GetAllCartAuthor()
         {
             var data = await _entities
                 .Where(a => !a.SoftDeleted)
@@ -29,7 +29,7 @@ namespace Repository.Repositories.Implementation
             return data;
         }
 
-        public async Task<Carts> GetNew(int id)
+        public async Task<Carts> GetByIdCartAuthor(int id)
         {
                 var data = await _entities
                 .Where(a => !a.SoftDeleted)

@@ -9,7 +9,7 @@ namespace Service.Service.Interface
         Task<List<CartListDto>> GetAllAsync();
         Task DeleteAsync(int id);
         Task SoftDeleteAsync(int id);
-        Task<CartListDto> GetById(int id);
+        Task<CartListDto> GetByIdAsync(int id);
         Task UpdateAsync(int id, CartCreateAndUpdateDto cart);
         Task<List<CartListDto>> SerachAsync(string? searchText);
     }

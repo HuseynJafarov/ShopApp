@@ -50,12 +50,11 @@ namespace shop.App.Controllers
         {
             try
             {
-                var data = await _cartService.GetById(id);
+                var data = await _cartService.GetByIdAsync(id);
                 return Ok(data);
             }
             catch (Exception)
             {
-
                 return NotFound("No records found!");
             }
         }
