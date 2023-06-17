@@ -10,11 +10,13 @@ namespace Repository.Repositories.Implementation
     {
         private readonly AppDbContext _context;
         private readonly DbSet<Carts> _entities;
+        private readonly DbSet<CartAuthor> _entityCartAuthor;
 
         public CartsRepository(AppDbContext context) :base(context) 
         {
             _context = context;
             _entities = _context.Set<Carts>();
+            _entityCartAuthor = _context.Set<CartAuthor>();
         }
 
         public async Task<List<Carts>> GetAllNew()
@@ -29,12 +31,23 @@ namespace Repository.Repositories.Implementation
 
         public async Task<Carts> GetNew(int id)
         {
-            var data = await _entities
+                var data = await _entities
                 .Where(a => !a.SoftDeleted)
                 .Include(x => x.CartAuthors)
                 .ThenInclude(x => x.Author)
-                .FirstOrDefaultAsync(x=> x.Id == id);
-            return data;
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id) ?? throw new NullReferenceException();
+                return data;
+        }
+
+        public async Task DeleteCartAuthor(List<CartAuthor> cartAuthors)
+        {
+            foreach (var item in cartAuthors)
+            {
+                _entityCartAuthor.Remove(item);
+            }
+
+            await _context.SaveChangesAsync();
         }
 
         

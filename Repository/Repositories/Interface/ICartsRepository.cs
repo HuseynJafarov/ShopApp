@@ -12,5 +12,6 @@ namespace Repository.Repositories.Interface
     {
         Task<List<Carts>> GetAllNew();
         Task<Carts> GetNew(int id);
+        Task DeleteCartAuthor(List<CartAuthor> cartAuthors);
     }
 }

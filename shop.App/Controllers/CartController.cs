@@ -99,11 +99,11 @@ namespace shop.App.Controllers
                 await _cartService.UpdateAsync(id, cart);
                 return Ok();
 
-            }
+            }   
             catch (NullReferenceException)
             {
 
-                return NotFound();
+                return BadRequest(new { ErrorMessage = "Not Update" });
             }
         }
 

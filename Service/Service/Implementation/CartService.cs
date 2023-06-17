@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Domain.Entities;
-using Microsoft.AspNetCore.Http;
-using Repository.Repositories.Implementation;
 using Repository.Repositories.Interface;
 using Service.DTOs.Cart;
 using Service.Helpers;
@@ -15,7 +13,7 @@ namespace Service.Service.Implementation
         private readonly ICartsRepository _repo;
         private readonly IMapper _mapper;
         private readonly IAuthorRepository _authorRepo;
-       
+
 
         public CartService(ICartsRepository repo, IMapper mapper, IAuthorRepository authorRepo)
         {
@@ -28,9 +26,11 @@ namespace Service.Service.Implementation
         public async Task CreateAsync(CartCreateAndUpdateDto cart)
         {
 
-            if(cart.AuthorIds != null && cart.AuthorIds.Any())
+            if (cart.AuthorIds != null && cart.AuthorIds.Any())
             {
                 var authors = await _authorRepo.FindAllAsync(a => cart.AuthorIds.Contains(a.Id));
+
+               
 
                 var mapCart = _mapper.Map<Carts>(cart);
                 mapCart.Image = await cart.Photo.GetBytes();
@@ -65,12 +65,12 @@ namespace Service.Service.Implementation
             await _repo.Delete(carts);
         }
 
-       
+
 
         public async Task<List<CartListDto>> GetAllAsync()
         {
             var dbData = await _repo.GetAllNew();
-           
+
             //var newdata = dbData.Select(d=>new CartListDto
             //{
             //    Image = Convert.ToBase64String(d.Image)
@@ -79,7 +79,7 @@ namespace Service.Service.Implementation
             return data;
         }
 
-      
+
 
         public async Task<List<CartListDto>> SerachAsync(string? searchText)
         {
@@ -104,35 +104,29 @@ namespace Service.Service.Implementation
 
         public async Task UpdateAsync(int id, CartCreateAndUpdateDto cart)
         {
-            //var dbCart = await _repo.GetNew(id);
-
-            //var mapCart = _mapper.Map<Carts>(cart);
-            //mapCart.Image = await cart.Photo.GetBytes();
-            //mapCart.CartAuthors = new List<CartAuthor>();
-
-
             if (cart.AuthorIds != null && cart.AuthorIds.Any())
             {
-                var authors = await _authorRepo.FindAllAsync( a => cart.AuthorIds.Contains(a.Id));
+                var authors = await _authorRepo.FindAllAsync(a => cart.AuthorIds.Contains(a.Id));
 
                 var mapCart = _mapper.Map<Carts>(cart);
                 mapCart.Id = id;
                 mapCart.Image = await cart.Photo.GetBytes();
                 mapCart.CartAuthors = new List<CartAuthor>();
+                var cartAuthor1 = await _repo.GetNew(id);
+
+                await _repo.DeleteCartAuthor(cartAuthor1.CartAuthors.ToList());
 
                 foreach (var author in authors)
                 {
-                    if(mapCart.CartAuthors.Any(a=>a.AuthorId == author.Id))
-                    {
+                   
                         var cartAuthor = new CartAuthor
                         {
-                            Carts = mapCart,
-
+                            CartsId = id,
                             AuthorId = (await GetById(author.Id)).Id
                         };
                         mapCart.CartAuthors.Add(cartAuthor);
 
-                    }
+                   
                 }
                 _mapper.Map(cart, mapCart);
                 await _repo.Update(mapCart);
@@ -142,6 +136,9 @@ namespace Service.Service.Implementation
                 throw new Exception("You must select at least one author.");
             }
         }
+
+
+
 
         public async Task<CartListDto> GetById(int id)
         {
