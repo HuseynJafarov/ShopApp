@@ -29,7 +29,7 @@ namespace Service.Mappings
             CreateMap<Author, AuthorListDto>()
                 .ForMember(dest => dest.BlogTitle, opt => opt.MapFrom(src => src.Blog.Title))
                 .ForMember(dest => dest.CartsTitle, opt => opt
-                        .MapFrom(src => src.CartAuthors.Where(m => m.CartsId == src.Id).Select(d => d.Carts.Title)))
+                        .MapFrom(src => src.CartAuthors.Where(m => m.AuthorId == src.Id).Select(d => d.Carts.Title)))
                 .ForMember(dest => dest.Image, opt => opt
                         .MapFrom(src => Convert.ToBase64String(src.Image)));
             CreateMap<AuthorCreateAndUpdateDto, Author>().ReverseMap();

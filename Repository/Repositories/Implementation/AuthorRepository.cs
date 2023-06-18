@@ -24,6 +24,7 @@ namespace Repository.Repositories.Implementation
                 .AsNoTracking()
                 .Include(x => x.CartAuthors)
                 .ThenInclude(x => x.Carts)
+                .AsNoTracking()
                 .ToListAsync();
             return data;
         }
@@ -36,6 +37,7 @@ namespace Repository.Repositories.Implementation
                 .AsNoTracking()
                 .Include(x => x.CartAuthors)
                 .ThenInclude(x => x.Carts)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(x=> x.Id == id);
             return data;
         }

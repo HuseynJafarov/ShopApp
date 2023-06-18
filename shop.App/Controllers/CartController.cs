@@ -31,7 +31,7 @@ namespace shop.App.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAllWithAuthor()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
@@ -45,7 +45,8 @@ namespace shop.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetWithAuthor([Required] int id)
+        [Route("{id}")]
+        public async Task<IActionResult> GetById([Required] int id)
         {
             try
             {
