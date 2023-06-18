@@ -12,6 +12,7 @@ namespace Service.Service.Interface
     {
         Task CreateAsync(StudentCreateAndUpdateDto data);
         Task<List<StudentListDto>> GetAllAsync();
+        Task<StudentListDto> GetByIdAsync(int id);
         Task DeleteAsync(int id);
         Task SoftDeleteAsync(int id);
         Task UpdateAsync(int id, StudentCreateAndUpdateDto data);

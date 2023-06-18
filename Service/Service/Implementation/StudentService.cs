@@ -3,6 +3,7 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Repositories.Interface;
 using Service.DTOs.Student;
+using Service.Helpers;
 using Service.Service.Interface;
 
 namespace Service.Service.Implementation
@@ -11,16 +12,30 @@ namespace Service.Service.Implementation
     {
         private readonly IStudentRepository _repo;
         private readonly IMapper _mapper;
+        private readonly ICartsRepository _cartsRepository;
 
-        public StudentService(IStudentRepository studentRepository, IMapper mapper)
+        public StudentService(IStudentRepository studentRepository,
+            IMapper mapper,
+            ICartsRepository cartsRepository)
         {
             _repo = studentRepository;
             _mapper = mapper;
+            _cartsRepository = cartsRepository;
         }
 
         public async Task CreateAsync(StudentCreateAndUpdateDto data)
         {
-             await _repo.Create(_mapper.Map<Student>(data));
+            var cart = await _cartsRepository
+            .FindAllAsync(a =>
+            a.Id == data.CartId);
+
+            var mapStudent = _mapper
+                .Map<Student>(data);
+
+            mapStudent.Image = await
+                data.Photo.GetBytes();
+
+            await _repo.Create(mapStudent);
         }
 
         public async Task DeleteAsync(int id)
@@ -30,7 +45,12 @@ namespace Service.Service.Implementation
 
         public async Task<List<StudentListDto>> GetAllAsync()
         {
-            return  _mapper.Map<List<StudentListDto>>(await _repo.GetAll());
+            return  _mapper.Map<List<StudentListDto>>(await _repo.GetAllWithCart());
+        }
+
+        public async Task<StudentListDto> GetByIdAsync(int id)
+        {
+            return _mapper.Map<StudentListDto>(await _repo.GetByIdWithCart(id));
         }
 
         public async Task<List<StudentListDto>> SerachAsync(string? searchText)
@@ -56,7 +76,7 @@ namespace Service.Service.Implementation
 
         public async Task UpdateAsync(int id, StudentCreateAndUpdateDto data)
         {
-            Student dbStudent = await (_repo.GetById(id));
+            Student dbStudent = await _repo.GetById(id);
             _mapper.Map(data, dbStudent);
             await _repo.Update(dbStudent);
         }

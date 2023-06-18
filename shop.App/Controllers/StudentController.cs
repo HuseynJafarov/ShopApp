@@ -16,7 +16,7 @@ namespace shop.App.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] StudentCreateAndUpdateDto student)
+        public async Task<IActionResult> Create([FromForm] StudentCreateAndUpdateDto student)
         {
             await _service.CreateAsync(student);
             return Ok();
@@ -26,6 +26,21 @@ namespace shop.App.Controllers
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _service.GetAllAsync());
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                return Ok(await _service.GetByIdAsync(id));
+            }
+            catch (NullReferenceException)
+            {
+
+                return NotFound();
+            }
         }
 
         [HttpDelete]
@@ -58,7 +73,7 @@ namespace shop.App.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromBody][Required] int id, StudentCreateAndUpdateDto student)
+        public async Task<IActionResult> Update([FromBody][Required] int id,[FromForm] StudentCreateAndUpdateDto student)
         {
             try
             {
