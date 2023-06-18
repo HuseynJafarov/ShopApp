@@ -15,7 +15,7 @@ namespace shop.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllWithCarts()
+        public async Task<IActionResult> GetAll()
         {
             return Ok(await _service.GetAllAsyncWithCarts());
         }
@@ -28,9 +28,10 @@ namespace shop.App.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Route("{id}")]
+        public async Task<IActionResult> GetById([Required]int id)
         {
-            return Ok(await _service.GetAllAsync());
+            return Ok(await _service.GetByIdAsyncWithCarts(id));
         }
 
         [HttpPost]

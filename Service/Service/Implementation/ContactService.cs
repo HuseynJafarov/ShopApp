@@ -29,7 +29,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            Contact contact = await _repo.Get(id);
+            Contact contact = await _repo.GetById(id);
             await _repo.Delete(contact);
         }
 
@@ -56,13 +56,13 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            Contact contact = await _repo.Get(id);
+            Contact contact = await _repo.GetById(id);
             await _repo.SoftDelete(contact);
         }
 
         public async Task UpdateAsync(int id, ContactCreateAndUpdateDto contact)
         {
-            var dbContact = await _repo.Get(id);
+            var dbContact = await _repo.GetById(id);
             _mapper.Map(contact, dbContact);
             await _repo.Update(dbContact);
         }

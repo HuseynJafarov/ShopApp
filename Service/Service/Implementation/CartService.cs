@@ -15,7 +15,10 @@ namespace Service.Service.Implementation
         private readonly IAuthorRepository _authorRepo;
         private readonly ICartAuthorRepository _cartAuthorRepo;
 
-        public CartService(ICartAuthorRepository cartAuthorRepository,ICartsRepository repo, IMapper mapper, IAuthorRepository authorRepo)
+        public CartService(ICartAuthorRepository cartAuthorRepository
+            ,ICartsRepository repo
+            , IMapper mapper
+            , IAuthorRepository authorRepo)
         {
             _repo = repo;
             _mapper = mapper;
@@ -28,7 +31,9 @@ namespace Service.Service.Implementation
 
             if (cart.AuthorIds != null && cart.AuthorIds.Any())
             {
-                var authors = await _authorRepo.FindAllAsync(a => cart.AuthorIds.Contains(a.Id));
+                var authors = await _authorRepo
+                    .FindAllAsync(a => cart.AuthorIds
+                    .Contains(a.Id));
 
                 var mapCart = _mapper.Map<Carts>(cart);
                 mapCart.Image = await cart.Photo.GetBytes();
@@ -59,7 +64,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            Carts carts = await _repo.Get(id);
+            Carts carts = await _repo.GetById(id);
             await _repo.Delete(carts);
         }
 
@@ -88,7 +93,7 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            Carts carts = await _repo.Get(id);
+            Carts carts = await _repo.GetById(id);
             await _repo.SoftDelete(carts);
         }
 
@@ -96,7 +101,9 @@ namespace Service.Service.Implementation
         {
             if (cart.AuthorIds != null && cart.AuthorIds.Any())
             {
-                var authors = await _authorRepo.FindAllAsync(a => cart.AuthorIds.Contains(a.Id));
+                var authors = await _authorRepo
+                    .FindAllAsync(a => cart.AuthorIds
+                    .Contains(a.Id));
 
                 var mapCart = _mapper.Map<Carts>(cart);
                 mapCart.Id = id;
@@ -104,7 +111,10 @@ namespace Service.Service.Implementation
                 mapCart.CartAuthors = new List<CartAuthor>();
                 var cartAuthor1 = await _repo.GetByIdCartAuthor(id);
 
-                await _cartAuthorRepo.DeleteCartAuthor(cartAuthor1.CartAuthors.ToList());
+                await _cartAuthorRepo
+                    .DeleteCartAuthor(cartAuthor1
+                    .CartAuthors
+                    .ToList());
 
                 foreach (var author in authors)
                 {

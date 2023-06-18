@@ -82,6 +82,9 @@ namespace shop.App
             builder.Services.AddScoped<ICartsRepository, CartsRepository>();
             builder.Services.AddScoped<ICartService, CartService>();
 
+            builder.Services.AddScoped<ICartAuthorRepository, CartAuthorRepository>();
+
+
             builder.Services.AddScoped<IContactRepository, ContactRepository>();
             builder.Services.AddScoped<IContactService, ContactService>();
 

@@ -20,6 +20,8 @@ namespace Repository.Repositories.Implementation
         {
             var data = await _entities
                 .Where(a => !a.SoftDeleted)
+                .Include(a=> a.Students)
+                .AsNoTracking()
                 .Include(x => x.CartAuthors)
                 .ThenInclude(x => x.Author)
                 .ToListAsync();
@@ -30,9 +32,10 @@ namespace Repository.Repositories.Implementation
         {
                 var data = await _entities
                 .Where(a => !a.SoftDeleted)
+                .Include("Students")
+                .AsNoTracking()
                 .Include(x => x.CartAuthors)
                 .ThenInclude(x => x.Author)
-                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id) ?? throw new NullReferenceException();
                 return data;
         }

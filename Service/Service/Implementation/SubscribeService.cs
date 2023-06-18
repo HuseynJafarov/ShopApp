@@ -29,7 +29,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            Subscribe subscribe = await _repo.Get(id);
+            Subscribe subscribe = await _repo.GetById(id);
             await _repo.Delete(subscribe);
         }
 
@@ -57,13 +57,13 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            Subscribe subscribe = await _repo.Get(id);
+            Subscribe subscribe = await _repo.GetById(id);
             await _repo.SoftDelete(subscribe);
         }
 
         public async Task UpdateAsync(int id, SubscribeCreateAndUpdateDto subscribe)
         {
-            var dbSubscribe = await _repo.Get(id);
+            var dbSubscribe = await _repo.GetById(id);
             _mapper.Map(subscribe, dbSubscribe);
             await _repo.Update(dbSubscribe);
         }

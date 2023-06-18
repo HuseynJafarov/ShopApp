@@ -26,7 +26,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            Domain.Entities.Services services = await _repo.Get(id);
+            Domain.Entities.Services services = await _repo.GetById(id);
             await _repo.Delete(services);
         }
 
@@ -54,13 +54,13 @@ namespace Service.Service.Implementation
         public async Task SoftDeleteAsync(int id)
         {
 
-            Domain.Entities.Services services = await _repo.Get(id);
+            Domain.Entities.Services services = await _repo.GetById(id);
             await _repo.SoftDelete(services);
         }
 
         public async Task UpdateAsync(int id, ServicesCreateAndUpdateDto services)
         {
-            var dbService = await _repo.Get(id);
+            var dbService = await _repo.GetById(id);
             _mapper.Map(services, dbService);
             await _repo.Update(dbService);
         }

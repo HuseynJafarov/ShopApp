@@ -29,7 +29,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            Slider slider = await _repo.Get(id);
+            Slider slider = await _repo.GetById(id);
             await _repo.Delete(slider);
         }
 
@@ -56,14 +56,14 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            Slider slider = await _repo.Get(id);
+            Slider slider = await _repo.GetById(id);
             await _repo.SoftDelete(slider);
         }
 
         public async Task UpdateAsync(int id, SliderCreateAndUpdateDto slider)
         {
 
-            var dbSlider = await _repo.Get(id);
+            var dbSlider = await _repo.GetById(id);
             _mapper.Map(slider, dbSlider);
             await _repo.Update(dbSlider);
         }

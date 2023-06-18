@@ -6,9 +6,10 @@ namespace Service.Service.Interface
 {
     public interface IAuthorService
     {
-        Task<List<CartListDto>> GetAllAsyncWithCarts();
+        
         Task CreateAsync(AuthorCreateAndUpdateDto data);
-        Task<List<AuthorListDto>> GetAllAsync();
+        Task<List<AuthorListDto>> GetAllAsyncWithCarts();
+        Task<AuthorListDto> GetByIdAsyncWithCarts(int id);
         Task DeleteAsync(int id);
         Task SoftDeleteAsync(int id);
         Task UpdateAsync(int id, AuthorCreateAndUpdateDto data);

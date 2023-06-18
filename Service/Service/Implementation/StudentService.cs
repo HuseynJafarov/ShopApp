@@ -25,7 +25,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-             await _repo.Delete(await _repo.Get(id));
+             await _repo.Delete(await _repo.GetById(id));
         }
 
         public async Task<List<StudentListDto>> GetAllAsync()
@@ -51,12 +51,12 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            await _repo.SoftDelete(await _repo.Get(id));
+            await _repo.SoftDelete(await _repo.GetById(id));
         }
 
         public async Task UpdateAsync(int id, StudentCreateAndUpdateDto data)
         {
-            Student dbStudent = await (_repo.Get(id));
+            Student dbStudent = await (_repo.GetById(id));
             _mapper.Map(data, dbStudent);
             await _repo.Update(dbStudent);
         }

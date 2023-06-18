@@ -8,6 +8,7 @@ namespace Service.Service.Interface
         Task<List<BlogListDto>> GetAllAsync();
         Task DeleteAsync(int id);
         Task SoftDeleteAsync(int id);
+        Task<BlogListDto> GetByIdAsync(int id);
         Task UpdateAsync(int id, BlogCreateAndUpdateDto data);
         Task<List<BlogListDto>> SerachAsync(string? searchText);
     }

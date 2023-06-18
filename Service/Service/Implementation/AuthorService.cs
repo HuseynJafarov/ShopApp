@@ -12,7 +12,8 @@ namespace Service.Service.Implementation
         private readonly IAuthorRepository _repo;
         private readonly IMapper _mapper;
 
-        public AuthorService(IAuthorRepository authorRepository, IMapper mapper)
+        public AuthorService(IAuthorRepository authorRepository, 
+            IMapper mapper)
         {
             _repo = authorRepository;
             _mapper = mapper;
@@ -25,17 +26,17 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            await _repo.Delete(await _repo.Get(id));
+            await _repo.Delete(await _repo.GetById(id));
         }
 
-        public async Task<List<AuthorListDto>> GetAllAsync()
+        public async Task<AuthorListDto> GetByIdAsyncWithCarts(int id)
         {
-            return _mapper.Map<List<AuthorListDto>>(await _repo.GetAll());
+            return _mapper.Map<AuthorListDto>(await _repo.GetByIdWithBlogAndCart(id));
         }
 
-        public async Task<List<CartListDto>> GetAllAsyncWithCarts()
+        public async Task<List<AuthorListDto>> GetAllAsyncWithCarts()
         {
-           return _mapper.Map<List<CartListDto>>(await _repo.GetAllNew());
+           return _mapper.Map<List<AuthorListDto>>(await _repo.GetAllWithBlogAndCarts());
         }
 
         public async Task<List<AuthorListDto>> SerachAsync(string? searchText)
@@ -55,14 +56,16 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            await _repo.SoftDelete(await _repo.Get(id));
+            await _repo.SoftDelete(await _repo.GetById(id));
         }
 
         public async Task UpdateAsync(int id, AuthorCreateAndUpdateDto data)
         {
-            Author dbAuthor = await (_repo.Get(id));
+            Author dbAuthor = await (_repo.GetById(id));
             _mapper.Map(data, dbAuthor);
             await _repo.Update(dbAuthor);
         }
+
+     
     }
 }

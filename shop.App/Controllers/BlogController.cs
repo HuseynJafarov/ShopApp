@@ -16,11 +16,25 @@ namespace shop.App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] BlogCreateAndUpdateDto blog)
+        public async Task<IActionResult> Create([FromForm] BlogCreateAndUpdateDto blog)
         {
             await _service.CreateAsync(blog);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetById([Required] int id)
+        {
+            try
+            {
+                return Ok(await _service.GetByIdAsync(id));
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }   
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -58,7 +72,7 @@ namespace shop.App.Controllers
 
         [HttpPost]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute][Required] int id ,BlogCreateAndUpdateDto data)
+        public async Task<IActionResult> Update([FromRoute][Required] int id ,[FromForm]BlogCreateAndUpdateDto data)
         {
             try
             {

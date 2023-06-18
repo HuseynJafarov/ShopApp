@@ -26,17 +26,26 @@ namespace Service.Mappings
             CreateMap<AboutCreateAndUpdateDto, About>().ReverseMap();
 
             CreateMap<AuthorCreateAndUpdateDto, Author>();
-            CreateMap<Author, AuthorListDto>().ForMember(dest => dest.Image, opt => opt
-            .MapFrom(src => Convert.ToBase64String(src.Image)));
+            CreateMap<Author, AuthorListDto>()
+                .ForMember(dest => dest.BlogTitle, opt => opt.MapFrom(src => src.Blog.Title))
+                .ForMember(dest => dest.CartsTitle, opt => opt
+                        .MapFrom(src => src.CartAuthors.Where(m => m.CartsId == src.Id).Select(d => d.Carts.Title)))
+                .ForMember(dest => dest.Image, opt => opt
+                        .MapFrom(src => Convert.ToBase64String(src.Image)));
             CreateMap<AuthorCreateAndUpdateDto, Author>().ReverseMap();
 
             CreateMap<BlogCreateAndUpdateDto, Blog>();
-            CreateMap<Blog, BlogListDto>();
+            CreateMap<Blog, BlogListDto>()
+                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.Author.Name))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => Convert.ToBase64String(src.Image)));
             CreateMap<BlogCreateAndUpdateDto, Blog>().ReverseMap();
 
             CreateMap<CartCreateAndUpdateDto, Carts>();
             CreateMap<Carts, CartListDto>()
-                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.CartAuthors.Where(m => m.CartsId == src.Id).Select(d => d.Author.Name)))
+                .ForMember(dest => dest.AuthorName, opt => opt
+                        .MapFrom(src => src.CartAuthors.Where(m => m.CartsId == src.Id).Select(d => d.Author.Name)))
+                .ForMember(dest => dest.StudentFullName, opt => opt
+                        .MapFrom(src => src.Students.Select(d => d.FullName)))
                 .ForMember(dest => dest.Image, opt => opt.MapFrom(src => Convert.ToBase64String(src.Image)));
             CreateMap<CartCreateAndUpdateDto, Carts>().ReverseMap();
 

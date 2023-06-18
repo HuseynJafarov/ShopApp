@@ -7,7 +7,6 @@ namespace Service.DTOs.Author
         public string? Name { get; set; }
         public IFormFile Photo { get; set; }
         public string? Position { get; set; }
-        public List<int>? CartIds { get; set; }
-        public int BlogId { get; set; }
+        //public List<int>? CartIds { get; set; }
     }
 }

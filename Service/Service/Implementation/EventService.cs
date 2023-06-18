@@ -29,7 +29,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            Events events = await _repo.Get(id);
+            Events events = await _repo.GetById(id);
             await _repo.Delete(events);
         }
 
@@ -56,13 +56,13 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            Events events = await _repo.Get(id);
+            Events events = await _repo.GetById(id);
             await _repo.SoftDelete(events);
         }
 
         public async Task UpdateAsync(int id, EventCreateAndUpdateDto eventCreateAndUpdate)
         {
-            var dbEvent = await _repo.Get(id);
+            var dbEvent = await _repo.GetById(id);
             _mapper.Map(eventCreateAndUpdate, dbEvent);
             await _repo.Update(dbEvent);
         }

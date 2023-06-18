@@ -29,7 +29,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            About about = await _repo.Get(id);
+            About about = await _repo.GetById(id);
             await _repo.Delete(about);
         }
 
@@ -55,13 +55,13 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            About about = await (_repo.Get(id));
+            About about = await (_repo.GetById(id));
             await _repo.SoftDelete(about);
         }
 
         public async Task UpdateAsync(int id, AboutCreateAndUpdateDto about)
         {
-            About dbAbout = await (_repo.Get(id));
+            About dbAbout = await (_repo.GetById(id));
             _mapper.Map(about,dbAbout);
             await _repo.Update(dbAbout);
         }

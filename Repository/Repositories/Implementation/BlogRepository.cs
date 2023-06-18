@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Repository.Data;
 using Repository.Repositories.Interface;
 
-
 namespace Repository.Repositories.Implementation
 {
     public class BlogRepository: Repository<Blog>, IBlogRepository
@@ -16,24 +15,32 @@ namespace Repository.Repositories.Implementation
             _entities = _context.Set<Blog>();
         }
 
-        public async Task<List<Blog>> GetAllNew()
+        public async Task<List<Blog>> GetAllWithAuthor()
         {
             var data = await _entities
-                .Where(x => !x.SoftDeleted)
-                .Include(_entities => _entities.Author)
+                .Where(x =>
+                !x.SoftDeleted)
+                .Include(_entities =>
+                _entities.Author)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToListAsync()
+                ?? throw new NullReferenceException();
+
             return data;
         }
 
-        public async Task<Blog> GetByIdNew(int id)
+        public async Task<Blog> GetByIdWithAuthor(int id)
         {
             var data = await _entities
-                .Where(x => !x.SoftDeleted)
-                .Include(_entities => _entities.Author)
+                .Where(x =>
+                    !x.SoftDeleted)
+                .Include(_entities =>
+                    _entities.Author)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == id);
-            if (data == null) throw new NullReferenceException();
+                .FirstOrDefaultAsync(x =>
+                    x.Id == id)
+                ?? throw new NullReferenceException();
+          
             return data;
         }
     }

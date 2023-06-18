@@ -30,7 +30,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            TellUs tellUs = await _repo.Get(id);
+            TellUs tellUs = await _repo.GetById(id);
             await _repo.Delete(tellUs);
         }
 
@@ -57,14 +57,14 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            TellUs tellUs = await _repo.Get(id);
+            TellUs tellUs = await _repo.GetById(id);
             await _repo.SoftDelete(tellUs
                 );
         }
 
         public async Task UpdateAsync(int id, TellUsCreateAndUpdateDto tellUs)
         {
-            var dbTellUs = await _repo.Get(id);
+            var dbTellUs = await _repo.GetById(id);
             _mapper.Map(tellUs, dbTellUs);
             await _repo.Update(dbTellUs);
         }

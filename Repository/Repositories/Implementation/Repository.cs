@@ -42,7 +42,7 @@ namespace Repository.Repositories.Implementation
             return data;
         }
             
-        public async Task<T> Get(int id)
+        public async Task<T> GetById(int id)
         {
             T entity = await _entities.FindAsync(id) ?? throw new NotImplementedException();
             return entity;

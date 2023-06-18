@@ -29,7 +29,7 @@ namespace Service.Service.Implementation
 
         public async Task DeleteAsync(int id)
         {
-            Settings settings = await _repo.Get(id);
+            Settings settings = await _repo.GetById(id);
             await _repo.Delete(settings);
         }
 
@@ -56,13 +56,13 @@ namespace Service.Service.Implementation
 
         public async Task SoftDeleteAsync(int id)
         {
-            Settings settings = await _repo.Get(id);
+            Settings settings = await _repo.GetById(id);
             await _repo.SoftDelete(settings);
         }
 
         public async Task UpdateAsync(int id, SettingCreateAndUpdateDto setting)
         {
-            var dbSetting = await _repo.Get(id);
+            var dbSetting = await _repo.GetById(id);
             _mapper.Map(setting, dbSetting);
             await _repo.Update(dbSetting);
         }
