@@ -17,12 +17,23 @@ namespace Repository.Repositories.Implementation
             _entities = _context.Set<Student>();
         }
 
-        public async Task<List<Student>> GetAllNew()
+        public async Task<List<Student>> GetAllWithCart()
         {
             var data = await _entities
-                .Where(x=> !x.SoftDeleted)
+              .Where(x => !x.SoftDeleted)
+              .Include(_entities => _entities.Carts)
+              .AsNoTracking()
+              .ToListAsync();
+            return data;
+        }
+
+        public async Task<Student> GetByIdWithCart(int id)
+        {
+            var data = await _entities
+                .Where(x => !x.SoftDeleted)
                 .Include(_entities => _entities.Carts)
-                .ToListAsync();
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
             return data;
         }
     }

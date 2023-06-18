@@ -9,6 +9,7 @@ namespace Repository.Repositories.Interface
 {
     public interface IStudentRepository: IRepository<Student>
     {
-
+        Task<List<Student>> GetAllWithCart();
+        Task<Student> GetByIdWithCart(int id);
     }
 }
