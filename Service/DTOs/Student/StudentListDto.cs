@@ -10,6 +10,6 @@ namespace Service.DTOs.Student
         public string? Image { get; set; }
         public string? Info { get; set; }
         public bool IsGraduated { get; set; }
-        public string? CartName { get; set; }
+        public string? CartTitle { get; set; }
     }
 }

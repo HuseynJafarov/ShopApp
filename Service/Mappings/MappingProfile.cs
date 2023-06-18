@@ -82,7 +82,10 @@ namespace Service.Mappings
             CreateMap<TellUsCreateAndUpdateDto, TellUs>().ReverseMap();
 
             CreateMap<StudentCreateAndUpdateDto, Student>();
-            CreateMap<Student, StudentListDto>();
+            CreateMap<Student, StudentListDto>()
+                .ForMember(dest => dest.CartTitle, opt => opt.MapFrom(src => src.Carts.Title))
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => Convert.ToBase64String(src.Image)));
+            
             CreateMap<StudentCreateAndUpdateDto, Student>().ReverseMap();
 
 
