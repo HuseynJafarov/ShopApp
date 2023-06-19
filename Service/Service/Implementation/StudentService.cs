@@ -27,7 +27,7 @@ namespace Service.Service.Implementation
         {
             var cart = await _cartsRepository
             .FindAllAsync(a =>
-            a.Id == data.CartId);
+            a.Id == data.CartsId);
 
             var mapStudent = _mapper
                 .Map<Student>(data);

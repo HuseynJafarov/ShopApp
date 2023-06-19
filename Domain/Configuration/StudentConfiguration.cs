@@ -17,7 +17,7 @@ namespace Domain.Configuration
             builder.Property(x => x.Info).IsRequired().HasMaxLength(250);
             builder.Property(x => x.IsGraduated).IsRequired().HasDefaultValue(false);
             builder.Property(x => x.Image).IsRequired();
-            builder.Property(x => x.CartId).IsRequired();
+            builder.Property(x => x.CartsId).IsRequired();
         }
     }
 }

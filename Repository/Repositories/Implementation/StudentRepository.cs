@@ -22,7 +22,6 @@ namespace Repository.Repositories.Implementation
             var data = await _entities
               .Where(x => !x.SoftDeleted)
               .Include(_entities => _entities.Carts)
-              .AsNoTracking()
               .ToListAsync();
             return data;
         }
@@ -32,8 +31,8 @@ namespace Repository.Repositories.Implementation
             var data = await _entities
                 .Where(x => !x.SoftDeleted)
                 .Include(_entities => _entities.Carts)
-                .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
+
             return data;
         }
     }

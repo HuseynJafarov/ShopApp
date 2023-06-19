@@ -520,10 +520,7 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CartsId")
+                    b.Property<int>("CartsId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -797,7 +794,9 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Domain.Entities.Carts", "Carts")
                         .WithMany("Students")
-                        .HasForeignKey("CartsId");
+                        .HasForeignKey("CartsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Carts");
                 });

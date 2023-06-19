@@ -9,7 +9,7 @@ namespace Domain.Entities
         public byte[]? Image { get; set; }
         public string? Info { get; set; }
         public bool IsGraduated { get; set; }
-        public int CartId { get; set; }
         public Carts? Carts { get; set; }
+        public int CartsId { get; set; }
     }
 }
