@@ -31,6 +31,7 @@ namespace Service.Service.Implementation
             _roleManager = roleManager;
             _mapper = mapper;
         }
+
         public async Task AddRoleToUserAsync(UserRoleDto model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId);

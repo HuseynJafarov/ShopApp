@@ -13,6 +13,9 @@ namespace Repository.Data
             
         }
 
+        public DbSet<Basket>? Basket { get; set; }
+        public DbSet<BasketCart>? BasketCart { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AboutConfiguration());
@@ -29,6 +32,18 @@ namespace Repository.Data
             modelBuilder.ApplyConfiguration(new SliderConfiguration());
             modelBuilder.ApplyConfiguration(new SubscribeConfiguration());
             modelBuilder.ApplyConfiguration(new TellUsConfiguration());
+
+            modelBuilder.Entity<Basket>(a =>
+            {
+                a.Property<int>("Id");
+                a.HasKey("Id");
+            });
+            modelBuilder.Entity<BasketCart>(a =>
+            {
+                a.Property<int>("Id");
+                a.HasKey("Id");
+            }); //ownsOne and many
+
             base.OnModelCreating(modelBuilder);
         }
 
