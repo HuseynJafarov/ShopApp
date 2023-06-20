@@ -25,10 +25,6 @@ namespace Service.Service.Implementation
 
         public async Task CreateAsync(StudentCreateAndUpdateDto data)
         {
-            var cart = await _cartsRepository
-            .FindAllAsync(a =>
-            a.Id == data.CartsId);
-
             var mapStudent = _mapper
                 .Map<Student>(data);
 

@@ -92,7 +92,7 @@ namespace Service.Service.Implementation
             
             var roles = await _userManager.GetRolesAsync(dbUser);
 
-            string token = GenerateJwtToken(dbUser.UserName, roles.ToList());
+            string token = GenerateJwtToken(dbUser.UserName,dbUser.Id ,roles.ToList());
 
             LoginResponse loginResponse = new()
             {
@@ -129,11 +129,11 @@ namespace Service.Service.Implementation
         }
 
 
-        private string GenerateJwtToken(string username, List<string> roles)
+        private string GenerateJwtToken(string username, string userId,List<string> roles)
         {
             var claims = new List<Claim>
             {
-            new Claim(JwtRegisteredClaimNames.Sub, username),
+            new Claim(JwtRegisteredClaimNames.Sub, userId),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.NameIdentifier, username)
             };
