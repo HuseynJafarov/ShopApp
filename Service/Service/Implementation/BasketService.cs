@@ -1,38 +1,47 @@
-﻿using Service.DTOs.Basket;
+﻿using AutoMapper;
+using Repository.Repositories.Interface;
+using Service.DTOs.Basket;
 using Service.Service.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Service.Service.Implementation
 {
     public class BasketService : IBasketService
     {
-        public Task AddBasketAsync(int id)
+        private readonly IBasketRepository _basketRepo;
+        private readonly IMapper _mapper;
+        public BasketService(IBasketRepository basketRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _basketRepo = basketRepository;
+            _mapper = mapper;
         }
 
-        public Task DeleteBasketAsync(int id)
+        public async Task AddBasketAsync(int id)
         {
-            throw new NotImplementedException();
+           await _basketRepo.AddBasket(id);
         }
 
-        public Task DeleteItemBasketAsync(int id)
+        public async Task DeleteBasketAsync(int id)
         {
-            throw new NotImplementedException();
+            await _basketRepo.DeleteBasket(id);
         }
 
-        public Task<List<BasketCartListDto>> GetBasketCartsAsync()
+        public async Task DeleteItemBasketAsync(int id)
         {
-            throw new NotImplementedException();
+            await _basketRepo.DeleteItemBasket(id);
         }
 
-        public Task<int> GetBasketCountAsync()
+        public async Task<List<BasketCartListDto>> GetBasketCartsAsync()
         {
-            throw new NotImplementedException();
+           var data = await _basketRepo.GetBasketCarts();
+           var mapData = _mapper.Map<List<BasketCartListDto>>(data);
+           return mapData;
+        }
+
+        public async Task<int> GetBasketCountAsync()
+        {
+            var data = await _basketRepo.GetBasketCount();
+            return data;
         }
     }
 }
