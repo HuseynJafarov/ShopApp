@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Repository.Data;
+using Repository.Dependency;
 using Repository.Repositories.Implementation;
 using Repository.Repositories.Interface;
+using Service.Helpers.Dependency;
 using Service.Mappings;
 using Service.Service.Implementation;
 using Service.Service.Interface;
@@ -66,55 +68,8 @@ namespace shop.App
                     };
                 });
 
-            builder.Services.AddAutoMapper(typeof(MappingProfile));
-
-            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-            builder.Services.AddScoped<IAboutRepository, AboutRepository>();
-            builder.Services.AddScoped<IAboutService, AboutService>();
-
-            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-            builder.Services.AddScoped<IAuthorService, AuthorService>();
-
-            builder.Services.AddScoped<IBlogRepository, BlogRepository>();
-            builder.Services.AddScoped<IBlogService, BlogService>();
-
-            builder.Services.AddScoped<ICartsRepository, CartsRepository>();
-            builder.Services.AddScoped<ICartService, CartService>();
-
-            builder.Services.AddScoped<ICartAuthorRepository, CartAuthorRepository>();
-
-
-            builder.Services.AddScoped<IContactRepository, ContactRepository>();
-            builder.Services.AddScoped<IContactService, ContactService>();
-
-            builder.Services.AddScoped<IEventsRepository, EventsRepository>();
-            builder.Services.AddScoped<IEventService, EventService>();
-
-
-            builder.Services.AddScoped<IServicesRepository, ServicesRepository>();
-            builder.Services.AddScoped<IServicesService, ServicesService>();
-
-            builder.Services.AddScoped<ISettingsRepository, SettingsRepository>();
-            builder.Services.AddScoped<ISettingService, SettingService>();
-
-            builder.Services.AddScoped<ISliderBoxsRepository, SliderBoxsRepository>();
-            builder.Services.AddScoped<ISliderBoxService, SliderBoxService>();
-
-            builder.Services.AddScoped<ISliderRepository, SliderRepository>();
-            builder.Services.AddScoped<ISliderService, SliderService>();
-
-            builder.Services.AddScoped<ISubscribeRepository, SubscribeRepository>();
-            builder.Services.AddScoped<ISubscribeService, SubscribeService>();
-
-            builder.Services.AddScoped<ITellUsRepository, TellUsRepository>();
-            builder.Services.AddScoped<ITellusService, TellusService>();
-
-            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-            builder.Services.AddScoped<IStudentService, StudentService>();
-
-            builder.Services.AddScoped<IAccountService, AccountService>();
-
+            builder.Services.RepositoryDescriptors();
+            builder.Services.ServiceDescriptors();
 
             builder.Services.Configure<JWTSettings>(builder.Configuration.GetSection("JwT"));
             builder.Services.AddScoped<JWTSettings>();
@@ -130,10 +85,7 @@ namespace shop.App
                     });
             });
 
-
             var app = builder.Build();
-
-
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

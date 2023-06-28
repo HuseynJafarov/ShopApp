@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Service.DTOs.About;
 using Service.DTOs.Author;
+using Service.DTOs.Basket;
 using Service.DTOs.Blog;
 using Service.DTOs.Cart;
 using Service.DTOs.Contact;
@@ -85,13 +86,13 @@ namespace Service.Mappings
             CreateMap<Student, StudentListDto>()
                 .ForMember(dest => dest.CartTitle, opt => opt.MapFrom(src => src.Carts.Title))
                 .ForMember(dest => dest.Image, opt => opt.MapFrom(src => Convert.ToBase64String(src.Image)));
-            
             CreateMap<StudentCreateAndUpdateDto, Student>().ReverseMap();
 
 
             CreateMap<RegisterDto, AppUser>();
             CreateMap<AppUser, UserDto>();
 
+            CreateMap<BasketCart, BasketCartListDto>();
         }
     }
 }
