@@ -1,5 +1,7 @@
 ﻿
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using Service.DTOs.Account;
 using Services.DTOs.Account;
 using Services.Helpers.Responses;
 
@@ -14,6 +16,10 @@ namespace Service.Service.Interface
         Task<IEnumerable<IdentityRole>> GetRolesAsync();
         Task<IEnumerable<UserDto>> GetUsersAsync();
         Task AddRoleToUserAsync(UserRoleDto model);
-        Task<IEnumerable<string>> GetRolesByUserAsync(string userId);
+        Task<IEnumerable<string>> GetUserRole(string email);
+        Task ChangeRoleAsync(string id);
+        Task ChangePassword(AppUser appUser, ChangePasswordDto changePasswordDto);
+        Task ConfirmEmail(string userId, string token);
+        Task<UserDto> GetUserByEmailAsync(string email);
     }
 }

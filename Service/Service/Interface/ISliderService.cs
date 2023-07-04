@@ -1,16 +1,10 @@
-﻿using Service.DTOs.Services;
-using Service.DTOs.Slider;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Service.DTOs.Slider;
+
 
 namespace Service.Service.Interface
 {
     public interface ISliderService
     {
-
         Task CreateAsync(SliderCreateAndUpdateDto slider);
         Task<List<SliderListDto>> GetAllAsync();
         Task DeleteAsync(int id);

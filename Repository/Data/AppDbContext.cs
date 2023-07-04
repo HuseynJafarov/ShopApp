@@ -15,6 +15,7 @@ namespace Repository.Data
 
         public DbSet<Basket>? Basket { get; set; }
         public DbSet<BasketCart>? BasketCart { get; set; }
+        public DbSet<AppUser>? User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

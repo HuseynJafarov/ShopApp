@@ -1,11 +1,54 @@
 {
   "Version": 1,
-  "Hash": "g90k7qfGafrOIjVF4DhHtcP207/kNTyVdFRIPo3+H4E=",
+  "Hash": "yodaQeDYh4jX/S6CYb3+N/zNrJbdilxhSdnzJZ2ebCE=",
   "Source": "shop.App",
   "BasePath": "_content/shop.App",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "shop.App\\wwwroot",
+      "Source": "shop.App",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\",
+      "BasePath": "_content/shop.App",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\Templates\\Confirm.html",
+      "SourceId": "shop.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\",
+      "BasePath": "_content/shop.App",
+      "RelativePath": "Templates/Confirm.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Templates\\Confirm.html"
+    },
+    {
+      "Identity": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\Templates\\Reset.html",
+      "SourceId": "shop.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\",
+      "BasePath": "_content/shop.App",
+      "RelativePath": "Templates/Reset.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Templates\\Reset.html"
+    }
+  ]
 }

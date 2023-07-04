@@ -87,3 +87,16 @@ C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Microsoft.AspNetCor
 C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\MailKit.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\MimeKit.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\shop.App.staticwebassets.runtime.json
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Scrutor.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\HP\Desktop\React\shop.App\shop.App\bin\Debug\net6.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll

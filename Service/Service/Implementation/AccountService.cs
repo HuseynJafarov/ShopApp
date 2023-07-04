@@ -2,17 +2,15 @@
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
+using Repository.Data;
+using Service.DTOs.Account;
 using Service.Service.Interface;
 using Services.DTOs.Account;
 using Services.Helpers;
 using Services.Helpers.Enums;
 using Services.Helpers.Responses;
 using System.Data;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+
 
 namespace Service.Service.Implementation
 {
@@ -21,50 +19,45 @@ namespace Service.Service.Implementation
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
-        private readonly JWTSettings _jwtSetting;
+        private readonly IEmailService _emailService;
+        private readonly ITokenService _tokenService;
 
-        public AccountService(IOptions<JWTSettings> jwt, UserManager<AppUser> userManager,
-            RoleManager<IdentityRole> roleManager, IMapper mapper)
+        public AccountService(UserManager<AppUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            IMapper mapper,
+            IEmailService emailService,
+            ITokenService tokenService)
         {
-            _jwtSetting = jwt.Value;
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
+            _emailService = emailService;
+            _tokenService = tokenService;
         }
 
-        public async Task AddRoleToUserAsync(UserRoleDto model)
+        public async Task<RegisterResponse> RegisterAsync(RegisterDto model)
         {
-            var user = await _userManager.FindByIdAsync(model.UserId);
-            var role = await _roleManager.FindByIdAsync(model.RoleId);
-            await _userManager.AddToRoleAsync(user, role.ToString());
-        }
+            AppUser user = _mapper.Map<AppUser>(model);
 
-        public async Task<IEnumerable<string>> GetRolesByUserAsync(string userId)
-        {
-            return await _userManager.GetRolesAsync(await _userManager.FindByIdAsync(userId));
-        }
+            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
-        public async Task CreateRoleAsync()
-        {
-            foreach (var role in Enum.GetValues(typeof(Roles)))
+            if (!result.Succeeded)
             {
-                if (!await _roleManager.RoleExistsAsync(role.ToString()))
+                RegisterResponse response = new()
                 {
-                    await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
-                }
+                    Errors = result.Errors.Select(m => m.Description).ToList(),
+                    StatusMessage = "Failed"
+                };
+
+                return response;
             }
-        }
 
-        public async Task<IEnumerable<IdentityRole>> GetRolesAsync()
-        {
-            return await _roleManager.Roles.ToListAsync();
-        }
+            await _userManager.AddToRoleAsync(user, Roles.Member.ToString());
 
-        public async Task<IEnumerable<UserDto>> GetUsersAsync()
-        {
-            return _mapper.Map<List<UserDto>>(await _userManager.Users.ToListAsync());
+             
+            return new RegisterResponse { Errors = null, StatusMessage = "Success" };
         }
-
+       
         public async Task<LoginResponse> LoginAsync(LoginDto model)
         {
             var dbUser = await _userManager.FindByEmailAsync(model.Email);
@@ -93,7 +86,7 @@ namespace Service.Service.Implementation
             
             var roles = await _userManager.GetRolesAsync(dbUser);
 
-            string token = GenerateJwtToken(dbUser.UserName,dbUser.Id ,roles.ToList());
+            string token = _tokenService.GenerateJwtToken(dbUser.UserName,dbUser.Email ,roles.ToList());
 
             LoginResponse loginResponse = new()
             {
@@ -105,58 +98,83 @@ namespace Service.Service.Implementation
             return  loginResponse;
 
         }
-
-        public async Task<RegisterResponse> RegisterAsync(RegisterDto model)
+        
+        public async Task CreateRoleAsync()
         {
-            AppUser user = _mapper.Map<AppUser>(model);
-
-            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            foreach (var role in Enum.GetValues(typeof(Roles)))
             {
-                RegisterResponse response = new()
+                if (!await _roleManager.RoleExistsAsync(role.ToString()))
                 {
-                    Errors = result.Errors.Select(m => m.Description).ToList(),
-                    StatusMessage = "Failed"
-                };
-
-                return response;
+                    await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
+                }
             }
-
-            await _userManager.AddToRoleAsync(user, Roles.Member.ToString());
-
-             
-            return new RegisterResponse { Errors = null, StatusMessage = "Success" };
+        }
+       
+        public async Task<IEnumerable<IdentityRole>> GetRolesAsync()
+        {
+            return await _roleManager.Roles.ToListAsync();
+        }
+        
+        public async Task<IEnumerable<UserDto>> GetUsersAsync()
+        {
+            return _mapper.Map<List<UserDto>>(await _userManager.Users.ToListAsync());
         }
 
-
-        private string GenerateJwtToken(string username, string userId,List<string> roles)
+        public async Task AddRoleToUserAsync(UserRoleDto model)
         {
-            var claims = new List<Claim>
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            var role = await _roleManager.FindByIdAsync(model.RoleId);
+
+
+            await _userManager.AddToRoleAsync(user, role.ToString());
+        }
+
+        public async Task<IEnumerable<string>> GetUserRole(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles;
+        }
+
+        public async Task ChangeRoleAsync(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            var role = await _userManager.GetRolesAsync(user);
+
+            if (role[0] == "Admin" )
             {
-            new Claim(JwtRegisteredClaimNames.Sub, userId),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, username)
-            };
-
-            roles.ForEach(role =>
+                await _userManager.AddToRoleAsync(user, "Member");
+                await _userManager.RemoveFromRoleAsync(user, "Admin");
+            }
+            if (role[0] == "Member")
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            });
+                await _userManager.AddToRoleAsync(user, "Admin");
+                await _userManager.RemoveFromRoleAsync(user, "Member");
+            }
+        }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSetting.Key));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(Convert.ToDouble(_jwtSetting.ExpireDays));
+        public async Task ChangePassword(AppUser appUser, ChangePasswordDto changePasswordDto)
+        {
+            var appuse = await _userManager.FindByIdAsync(appUser.Id);
 
-            var token = new JwtSecurityToken(
-                _jwtSetting.Issuer,
-                _jwtSetting.Auidience,
-                claims,
-                expires: expires,
-                signingCredentials: creds
-            );
+            //var result = await _userManager.RemovePasswordAsync(appuse);
+            //result = await _userManager.AddPasswordAsync(appuse, updatePasswordDto.Password);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var result = await _userManager.ChangePasswordAsync(appuse, changePasswordDto.Password, changePasswordDto.NewPassword);
+            var user = _mapper.Map(changePasswordDto, appuse);
+            var upuser = await _userManager.UpdateAsync(user);
+        }
+
+        public async Task ConfirmEmail(string userId, string token)
+        {
+            await _emailService.ConfirmEmail(userId, token);
+        }
+
+        public async Task<UserDto> GetUserByEmailAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            var mappedUser = _mapper.Map<UserDto>(user);
+            return mappedUser;
         }
     }
 }

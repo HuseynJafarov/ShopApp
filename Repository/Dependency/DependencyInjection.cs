@@ -10,19 +10,21 @@ namespace Repository.Dependency
         public static IServiceCollection RepositoryDescriptors(this IServiceCollection services)
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IAboutRepository, AboutRepository>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddScoped<ICartsRepository, CartsRepository>();
+            services.AddScoped<ICartAuthorRepository, CartAuthorRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
+            services.AddScoped<IEventsRepository, EventsRepository>();
             services.AddScoped<ISubscribeRepository, SubscribeRepository>();
             services.AddScoped<ISettingsRepository, SettingsRepository>();
-            services.AddScoped<ICartsRepository, CartsRepository>();
-            services.AddScoped<ITellUsRepository, TellUsRepository>();
-            services.AddScoped<IEventsRepository, EventsRepository>();
+            services.AddScoped<ISliderRepository, SliderRepository>();
             services.AddScoped<ISliderBoxsRepository, SliderBoxsRepository>();
             services.AddScoped<IServicesRepository, ServicesRepository>();
-            services.AddScoped<ICartAuthorRepository, CartAuthorRepository>();
-            services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IContactRepository, ContactRepository>();
-            services.AddScoped<IAuthorRepository, AuthorRepository>();
-            services.AddScoped<IAboutRepository, AboutRepository>();
+            services.AddScoped<ITellUsRepository, TellUsRepository>();
 
             return services;
         }

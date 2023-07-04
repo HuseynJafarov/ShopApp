@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Service.DTOs.About;
+using Service.DTOs.Account;
 using Service.DTOs.Author;
 using Service.DTOs.Basket;
 using Service.DTOs.Blog;
@@ -91,6 +92,7 @@ namespace Service.Mappings
 
             CreateMap<RegisterDto, AppUser>();
             CreateMap<AppUser, UserDto>();
+            CreateMap<UpdatePasswordDto, AppUser>();
 
             CreateMap<BasketCart, BasketCartListDto>();
         }
