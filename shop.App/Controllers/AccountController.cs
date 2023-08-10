@@ -42,7 +42,7 @@ namespace shop.App.Controllers
 
             return Ok(response);
         }
-
+    
 
         [AllowAnonymous]
         [HttpPost]
@@ -140,24 +140,21 @@ namespace shop.App.Controllers
 
             var passwordToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-            //var url1 = Url.Action("ResetPassword", "Account", new { userId = user.Id, token = passwordToken }, Request.Scheme, Request.Host.ToString());
-            //string url2 = Url.Action("http://localhost:3000/", "forgotpassword", new { email = user.Email, Id = user.Id, token = forgotpasswordtoken, }, Request.Scheme);
-            
-            string url3 = "http://localhost:3000/forgotpassword/" + user.Email + "/token=" + passwordToken;
-            _emailService.ForgotPassword(user, url3, forgotPassword);
+            string url = "http://localhost:3000/forgotpassword/" + user.Email + "/token=" + passwordToken;
+            _emailService.ForgotPassword(user, url, forgotPassword);
 
             return Ok();
         }
 
         [HttpPost]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordDto resetPassword)
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordDto resetPassword)
         {
             var user = await _userManager.FindByEmailAsync(resetPassword.Email);
 
             if (user == null) throw new Exception("User not found");
 
-            var result =  await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+            await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
 
             return Ok();
         }

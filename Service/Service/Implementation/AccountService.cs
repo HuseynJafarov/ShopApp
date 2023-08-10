@@ -123,8 +123,7 @@ namespace Service.Service.Implementation
         public async Task AddRoleToUserAsync(UserRoleDto model)
         {
             var user = await _userManager.FindByIdAsync(model.UserId);
-            var role = await _roleManager.FindByIdAsync(model.RoleId);
-
+            var role = await _roleManager.FindByIdAsync(model.UserId);
 
             await _userManager.AddToRoleAsync(user, role.ToString());
         }
@@ -160,9 +159,9 @@ namespace Service.Service.Implementation
             //var result = await _userManager.RemovePasswordAsync(appuse);
             //result = await _userManager.AddPasswordAsync(appuse, updatePasswordDto.Password);
 
-            var result = await _userManager.ChangePasswordAsync(appuse, changePasswordDto.Password, changePasswordDto.NewPassword);
-            var user = _mapper.Map(changePasswordDto, appuse);
-            var upuser = await _userManager.UpdateAsync(user);
+            await _userManager.ChangePasswordAsync(appuse, changePasswordDto.Password, changePasswordDto.NewPassword);
+            var mappedUser = _mapper.Map(changePasswordDto, appuse);
+            await _userManager.UpdateAsync(mappedUser);
         }
 
         public async Task ConfirmEmail(string userId, string token)
@@ -176,5 +175,7 @@ namespace Service.Service.Implementation
             var mappedUser = _mapper.Map<UserDto>(user);
             return mappedUser;
         }
+
+        
     }
 }

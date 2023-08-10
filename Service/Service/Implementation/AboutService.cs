@@ -22,6 +22,9 @@ namespace Service.Service.Implementation
             _mapper = mapper;
         }
 
+
+
+
         public async Task CreateAsync(AboutCreateAndUpdateDto about)
         {
             await _repo.Create(_mapper.Map<About>(about));
