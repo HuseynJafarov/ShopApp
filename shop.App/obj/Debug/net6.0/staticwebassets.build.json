@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yodaQeDYh4jX/S6CYb3+N/zNrJbdilxhSdnzJZ2ebCE=",
+  "Hash": "gt0evG3g6ZKBgQqfZWXgBwszSioTSnHiF1xAztBhhpk=",
   "Source": "shop.App",
   "BasePath": "_content/shop.App",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "shop.App\\wwwroot",
       "Source": "shop.App",
-      "ContentRoot": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\shop.App\\wwwroot\\",
       "BasePath": "_content/shop.App",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\Templates\\Confirm.html",
+      "Identity": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\shop.App\\wwwroot\\Templates\\Confirm.html",
       "SourceId": "shop.App",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\shop.App\\wwwroot\\",
       "BasePath": "_content/shop.App",
       "RelativePath": "Templates/Confirm.html",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\Templates\\Confirm.html"
     },
     {
-      "Identity": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\Templates\\Reset.html",
+      "Identity": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\shop.App\\wwwroot\\Templates\\Reset.html",
       "SourceId": "shop.App",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\HP\\Desktop\\React\\shop.App\\shop.App\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\shop.App\\wwwroot\\",
       "BasePath": "_content/shop.App",
       "RelativePath": "Templates/Reset.html",
       "AssetKind": "All",

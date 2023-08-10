@@ -40,13 +40,13 @@ namespace Repository.Repositories.Implementation
             
         public async Task<T> GetById(int id)
         {
-            T entity = await _entities.FindAsync(id) ?? throw new NotImplementedException();
+            T entity = await _entities.FindAsync(id)?? throw new NotImplementedException();
             return entity;
         }
 
         public async Task<List<T>> GetAll()
         {
-            return await _entities.AsNoTracking().ToListAsync();
+            return await _entities.Where(x=> !x.SoftDeleted).AsNoTracking().ToListAsync();
         }
 
         public async Task SoftDelete(T entity)

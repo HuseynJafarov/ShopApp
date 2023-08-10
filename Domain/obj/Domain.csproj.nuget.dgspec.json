@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Desktop\\React\\shop.App\\Domain\\Domain.csproj": {}
+    "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\React\\shop.App\\Domain\\Domain.csproj": {
+    "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\React\\shop.App\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\HP\\Desktop\\React\\shop.App\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\React\\shop.App\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\husey\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\husey\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -69,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
