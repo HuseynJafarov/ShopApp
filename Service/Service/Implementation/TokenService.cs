@@ -15,20 +15,21 @@ namespace Service.Service.Implementation
     public class TokenService : ITokenService
     {
         private readonly JWTSettings _jwtSetting;
-
+        
         public TokenService(IOptions<JWTSettings> jwt)
         {
             _jwtSetting = jwt.Value;
         }
 
-        public string GenerateJwtToken(string username, string email, List<string> roles)
+        public string GenerateJwtToken(string id, string username, string email, List<string> roles)
         {
             var claims = new List<Claim>
             {
             new Claim(JwtRegisteredClaimNames.Sub, email),
             new Claim(JwtRegisteredClaimNames.Sub, username),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, username)
+            new Claim(ClaimTypes.NameIdentifier, username),
+            new Claim(JwtRegisteredClaimNames.UniqueName,id),
             };
 
             roles.ForEach(role =>

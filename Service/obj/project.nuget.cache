@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y+MD996AEKMTWhrPituVWrhebhNvIpBW38AyVNx8epcUuPS5jiNItxllyd3q+56OSfjtEelyEyLkZrtnEtQdpA==",
+  "dgSpecHash": "uoffcUF4B3a3w2ytfBusxIJ5DDqz03mHzyuw2h8QQtwlTr7Z+W8sLv52pFhMeQoWRFBCunDg8urklbeRjSd5Hw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Service\\Service.csproj",
+  "projectFilePath": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\husey\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\husey\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

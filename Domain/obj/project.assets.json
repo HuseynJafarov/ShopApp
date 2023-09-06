@@ -826,11 +826,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj",
+      "projectPath": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\husey\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\obj\\",
+      "outputPath": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\husey\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -888,7 +888,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

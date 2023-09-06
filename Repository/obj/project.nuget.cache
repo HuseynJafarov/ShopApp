@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4PzWsWn43YbXjdC0MAIPq/aVvqgNa77TrA0doEROVR8fw7v6FcPIgvKL8K8r+wQ0Mv1WWj/BrzW9o+J1dWnYkg==",
+  "dgSpecHash": "cCPUSMRQBTfua8qxEhP32Ej12rYXGF0khJhOFHdIrGZDWMs9Zgnkn7Zewj15cOzLPUC3OGCfnqilm6T1JcXg8A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Repository\\Repository.csproj",
+  "projectFilePath": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Repository\\Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\husey\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\husey\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.16\\microsoft.aspnetcore.cryptography.internal.6.0.16.nupkg.sha512",

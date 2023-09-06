@@ -25,6 +25,7 @@ namespace Service.Service.Implementation
 
         public async Task ConfirmEmail(string userId, string token)
         {
+
             AppUser user = await _userManager.FindByIdAsync(userId);
 
             if (user != null)
@@ -51,34 +52,41 @@ namespace Service.Service.Implementation
 
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("huseynnj@code.edu.az", "0557655033Hh.");
+            smtp.Authenticate("huseynnj@code.edu.az", "gjfbbswxmycfuffw");
             smtp.Send(message);
             smtp.Disconnect(true);
         }
 
         public  void Register(RegisterDto registerDto, string link)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("OnlineCourse", "huseynnj@code.edu.az"));
-            message.To.Add(new MailboxAddress(registerDto.FullName, registerDto.Email));
-            message.Subject = "Confirm Email";
-            string emailbody = string.Empty;
-
-            using (StreamReader streamReader = new StreamReader(Path.Combine(_env.WebRootPath, "Templates", "Confirm.html")))
+            try
             {
-                emailbody = streamReader.ReadToEnd();
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("OnlineCourse", "huseynnj@code.edu.az"));
+                message.To.Add(new MailboxAddress(registerDto.FullName, registerDto.Email));
+                message.Subject = "Confirm Email";
+                string emailbody = string.Empty;
+
+                using (StreamReader streamReader = new StreamReader(Path.Combine(_env.WebRootPath, "Templates", "Confirm.html")))
+                {
+                    emailbody = streamReader.ReadToEnd();
+                }
+
+                emailbody = emailbody.Replace("{{link}}", $"{link}").Replace("{{fullname}}", $"{registerDto.FullName}");
+                message.Body = new TextPart(TextFormat.Html) { Text = emailbody };
+
+                using var smtp = new SmtpClient();
+                smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
+                smtp.Authenticate("huseynnj@code.edu.az", "gjfbbswxmycfuffw");
+                smtp.Send(message);
+                smtp.Disconnect(true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error sending email: " + ex.Message);
             }
 
-            emailbody = emailbody.Replace("{{code}}", $"{link}").Replace("{{fullname}}", $"{registerDto.FullName}");
-            message.Body = new TextPart(TextFormat.Html) { Text = emailbody };
 
-            using var smtp = new SmtpClient();
-            smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("huseynnj@code.edu.az", "0557655033Hh.");
-            smtp.Send(message);
-            smtp.Disconnect(true);
-
-            
         }
     }
 }

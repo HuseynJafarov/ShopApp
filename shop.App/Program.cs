@@ -23,10 +23,12 @@ namespace shop.App
 {
     public class Program
     {
+        private const string _cros = "mycors";
+        [Obsolete]
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            
             // Add services to the container.
 
             builder.Services.AddControllers()
@@ -110,7 +112,7 @@ namespace shop.App
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy(name: "mycors",
+                options.AddPolicy(name: _cros,
                     policy =>
                     {
                         policy.WithOrigins("http://localhost:3000")
@@ -128,7 +130,7 @@ namespace shop.App
                 app.UseSwagger();
                 app.UseSwaggerUI(c=> c.SwaggerEndpoint("/swagger/v1/swagger.json", "JWT_ApiIdentity v1"));
             }
-            app.UseCors("mycors");
+            app.UseCors(_cros);
 
             app.UseHttpsRedirection();
 

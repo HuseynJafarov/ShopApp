@@ -86,7 +86,7 @@ namespace Service.Service.Implementation
             
             var roles = await _userManager.GetRolesAsync(dbUser);
 
-            string token = _tokenService.GenerateJwtToken(dbUser.UserName,dbUser.Email ,roles.ToList());
+            string token = _tokenService.GenerateJwtToken(dbUser.Id,dbUser.UserName,dbUser.Email ,roles.ToList());
 
             LoginResponse loginResponse = new()
             {
@@ -162,11 +162,6 @@ namespace Service.Service.Implementation
             await _userManager.ChangePasswordAsync(appuse, changePasswordDto.Password, changePasswordDto.NewPassword);
             var mappedUser = _mapper.Map(changePasswordDto, appuse);
             await _userManager.UpdateAsync(mappedUser);
-        }
-
-        public async Task ConfirmEmail(string userId, string token)
-        {
-            await _emailService.ConfirmEmail(userId, token);
         }
 
         public async Task<UserDto> GetUserByEmailAsync(string email)

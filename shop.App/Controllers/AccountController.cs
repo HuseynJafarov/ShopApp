@@ -28,7 +28,7 @@ namespace shop.App.Controllers
 
         [HttpPost]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
-        public async Task<IActionResult> Register([FromBody] RegisterDto register)
+        public async Task<IActionResult> Register([FromForm] RegisterDto register)
         {
             var response = await _accountService.RegisterAsync(register);
 
@@ -36,7 +36,8 @@ namespace shop.App.Controllers
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            var link = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, token = code }, Request.Scheme, Request.Host.ToString());
+            var link = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, token = code }, 
+                Request.Scheme, Request.Host.ToString());
 
             _emailService.Register(register, link);
 
@@ -44,13 +45,18 @@ namespace shop.App.Controllers
         }
     
 
-        [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
-        public async Task<IActionResult> Login([FromBody] LoginDto login)
+        public async Task<IActionResult> Login([FromForm] LoginDto login)
         {
-            var result = await _accountService.LoginAsync(login);
-            return Ok(result);
+            try
+            {
+                return Ok(await _accountService.LoginAsync(login));
+            }
+            catch (Exception)
+            {
+                return BadRequest("UserName or Password wrong.");
+            }
         }
        
 
@@ -116,11 +122,12 @@ namespace shop.App.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
-            await _accountService.ConfirmEmail(userId, token);
-            return Redirect("http://localhost:3000/");
+            if (userId == null || token == null) return BadRequest();
+
+            await _emailService.ConfirmEmail(userId, token);
+            return Redirect("http://localhost:3000/login");      
         }
 
         [HttpGet]

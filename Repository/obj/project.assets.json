@@ -2461,11 +2461,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Repository\\Repository.csproj",
+      "projectUniqueName": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Repository\\Repository.csproj",
       "projectName": "Repository",
-      "projectPath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Repository\\Repository.csproj",
+      "projectPath": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Repository\\Repository.csproj",
       "packagesPath": "C:\\Users\\husey\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Repository\\obj\\",
+      "outputPath": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\husey\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2482,8 +2482,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\husey\\Desktop\\Project\\Adas\\ShopApp\\Domain\\Domain.csproj"
+            "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\husey\\Desktop\\Project\\Course\\ShopApp\\Domain\\Domain.csproj"
             }
           }
         }
@@ -2533,7 +2533,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

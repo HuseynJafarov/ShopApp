@@ -20,40 +20,53 @@ namespace Repository.Repositories.Implementation
 
         public async Task AddBasket(int id)
         {
-            var userId = GetUser();
-
-            var basket = await GetBasketUserId(userId);
-
-            if(basket == null)
+            try
             {
-                basket = new Basket
+                var userId = GetUser();
+
+                var basket = await GetBasketUserId(userId);
+
+                if (basket == null)
                 {
-                    AppUserId = userId
-                };
+                    basket = new Basket
+                    {
+                        AppUserId = userId
+                    };
 
-                await _context.Basket.AddAsync(basket);
-                await _context.SaveChangesAsync();
-            }
+                    await _context.Basket.AddAsync(basket);
+                    await _context.SaveChangesAsync();
+                }
 
-            var basketCart = basket.BasketCart
-                .FirstOrDefault(bc=> bc.CartId == id && bc.BasketId == basket.Id);
+                var basketCart = _context.BasketCart
+                    .FirstOrDefault(bc =>bc.CartId == id && bc.BasketId == basket.Id);
 
-            if(basketCart != null)
-            {
-                basketCart.Quantity++;
-            }
-            else
-            {
-                basketCart = new BasketCart
+                if (basketCart != null)
                 {
-                    CartId = id,
-                    BasketId = basket.Id,
-                    Quantity = 1
-                };
+                    basketCart.Quantity++;
+                }
+                else
+                {
+                    basketCart = new BasketCart
+                    {
+                        CartId = id,
+                        BasketId = basket.Id,
+                        Quantity = 1
+                    };
 
-                 basket.BasketCart.Add(basketCart);
+                    basket.BasketCart.Add(basketCart);
+                }
+                _context.SaveChanges();
             }
-              _context.SaveChanges();
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Hata Mesajı: " + ex.Message);
+
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine("Inner Exception: " + ex.InnerException.Message);
+                }
+            }
         }
 
         public async Task DeleteBasket(int id)
@@ -154,7 +167,7 @@ namespace Repository.Repositories.Implementation
 
             if (user == null) throw new NullReferenceException();
 
-            var userId = user.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            var userId = user.FindFirst(JwtRegisteredClaimNames.UniqueName)?.Value;
 
             if (userId == null) throw new NullReferenceException();
 

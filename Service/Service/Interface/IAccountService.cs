@@ -19,7 +19,6 @@ namespace Service.Service.Interface
         Task<IEnumerable<string>> GetUserRole(string email);
         Task ChangeRoleAsync(string id);
         Task ChangePassword(AppUser appUser, ChangePasswordDto changePasswordDto);
-        Task ConfirmEmail(string userId, string token);
         Task<UserDto> GetUserByEmailAsync(string email);
     }
 }

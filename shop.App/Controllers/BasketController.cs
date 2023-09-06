@@ -18,8 +18,10 @@ namespace shop.App.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBasket([Required][FromQuery]int id)
         {
+           
              await _basketService.AddBasketAsync(id);
              return Ok();
+           
         }
 
         [Authorize]
