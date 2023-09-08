@@ -108,7 +108,7 @@ namespace shop.App.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Search(string? searchText)
-        {
+      {
 
                 return Ok(await _cartService.SerachAsync(searchText));
         }

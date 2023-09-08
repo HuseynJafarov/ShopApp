@@ -81,7 +81,7 @@ namespace Service.Service.Implementation
             List<Carts> searchDatas = new();
             if (searchText != null)
             {
-                searchDatas = await _repo.FindAllAsync(m => m.Title.Contains(searchText) && m.Description.Contains(searchText));
+                searchDatas = await _repo.FindAllAsync(m => m.Title.Contains(searchText));
             }
             else
             {
