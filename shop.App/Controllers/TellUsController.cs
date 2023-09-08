@@ -18,7 +18,7 @@ namespace shop.App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TellUsCreateAndUpdateDto data)
+        public async Task<IActionResult> Create([FromForm] TellUsCreateAndUpdateDto data)
         {
             TellUsCreateAndUpdateDtoValidator validator = new();
             var validationResult = validator.Validate(data);

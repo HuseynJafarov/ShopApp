@@ -20,7 +20,7 @@ namespace shop.App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] SubscribeCreateAndUpdateDto data)
+        public async Task<IActionResult> Create([FromForm] SubscribeCreateAndUpdateDto data)
         {
             SubscribeCreateAndUpdateDtoValidator validator = new();
             var validationResult = validator.Validate(data);
